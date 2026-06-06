@@ -30,7 +30,7 @@ const steps = [
 
 export default function HowItWorks() {
   return (
-    <section id="como-funciona" className="relative py-32 sm:py-40">
+    <section id="como-funciona" className="relative py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -38,12 +38,12 @@ export default function HowItWorks() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8 }}
-          className="mb-24"
+          className="mb-16"
         >
           <p className="mb-4 text-sm font-semibold tracking-[0.2em] text-cyan-400 uppercase">
             Proceso
           </p>
-          <h2 className="text-4xl font-black text-white sm:text-5xl lg:text-7xl">
+          <h2 className="text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
             Tu web lista en<br />
             <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
               4 pasos.
@@ -52,7 +52,7 @@ export default function HowItWorks() {
         </motion.div>
 
         {/* Steps */}
-        <div className="relative space-y-24">
+        <div className="relative space-y-16">
           {/* Vertical line */}
           <div className="absolute top-0 left-8 hidden h-full w-px bg-gradient-to-b from-cyan-500/30 via-cyan-500/10 to-transparent md:block" />
 
@@ -77,7 +77,7 @@ export default function HowItWorks() {
 
               {/* Content */}
               <div className="pt-2">
-                <h3 className="mb-3 text-2xl font-bold text-white sm:text-3xl">
+                <h3 className="mb-3 text-xl font-semibold text-white sm:text-2xl">
                   {step.title}
                 </h3>
                 <p className="max-w-lg text-base leading-relaxed text-surface-400">
@@ -86,7 +86,7 @@ export default function HowItWorks() {
               </div>
 
               {/* Background number */}
-              <span className="pointer-events-none absolute -top-6 right-0 hidden text-[12rem] font-black leading-none text-surface-900/50 select-none lg:block">
+              <span className="pointer-events-none absolute -top-4 right-0 hidden text-[8rem] font-bold leading-none text-surface-900/30 select-none lg:block">
                 {step.num}
               </span>
             </motion.div>

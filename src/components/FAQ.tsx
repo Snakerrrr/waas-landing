@@ -50,7 +50,7 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="py-32 sm:py-40">
+    <section id="faq" className="py-24 sm:py-32">
       <div className="mx-auto max-w-3xl px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -60,7 +60,7 @@ export default function FAQ() {
           className="mb-16"
         >
           <p className="mb-4 text-sm font-semibold tracking-[0.2em] text-cyan-400 uppercase">FAQ</p>
-          <h2 className="text-4xl font-black text-white sm:text-5xl">
+          <h2 className="text-3xl font-bold text-white sm:text-4xl">
             Preguntas<br />
             <span className="text-cyan-400">Frecuentes.</span>
           </h2>

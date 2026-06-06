@@ -93,7 +93,7 @@ export default function Demos() {
   const filtered = activeCategory === "Todos" ? demos : demos.filter((d) => d.category === activeCategory);
 
   return (
-    <section id="demos" className="py-32 sm:py-40">
+    <section id="demos" className="py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -104,7 +104,7 @@ export default function Demos() {
           className="mb-16"
         >
           <p className="mb-4 text-sm font-semibold tracking-[0.2em] text-cyan-400 uppercase">Portafolio</p>
-          <h2 className="mb-6 text-4xl font-black text-white sm:text-5xl lg:text-7xl">
+          <h2 className="mb-6 text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
             Demos listas para<br />
             <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">tu negocio.</span>
           </h2>

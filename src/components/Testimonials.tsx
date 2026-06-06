@@ -12,17 +12,17 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <section className="py-32 sm:py-40">
+    <section className="py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8 }}
-          className="mb-20"
+          className="mb-14"
         >
           <p className="mb-4 text-sm font-semibold tracking-[0.2em] text-cyan-400 uppercase">Testimonios</p>
-          <h2 className="text-4xl font-black text-white sm:text-5xl lg:text-7xl">
+          <h2 className="text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
             Lo que dicen<br />
             <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
               nuestros clientes.
@@ -41,7 +41,7 @@ export default function Testimonials() {
               className="relative rounded-2xl border border-surface-800 bg-surface-950 p-8 transition-all duration-300 hover:border-surface-700"
             >
               {/* Giant quote mark */}
-              <span className="pointer-events-none absolute top-4 right-6 text-7xl font-black leading-none text-surface-800/60 select-none">
+              <span className="pointer-events-none absolute top-4 right-6 text-5xl font-bold leading-none text-surface-800/40 select-none">
                 "
               </span>
 

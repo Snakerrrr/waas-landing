@@ -12,7 +12,7 @@ export default function CalendlyButton() {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="group inline-flex items-center gap-3 rounded-xl border border-surface-700 px-8 py-5 text-lg font-bold text-surface-300 transition-all hover:border-cyan-500/30 hover:text-white"
+        className="group inline-flex items-center gap-3 rounded-xl border border-surface-700 px-8 py-4 text-base font-medium text-surface-300 transition-all hover:border-cyan-500/30 hover:text-white"
       >
         <Calendar className="h-5 w-5 text-cyan-400" />
         Agendar Llamada Gratuita

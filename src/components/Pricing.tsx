@@ -33,7 +33,7 @@ export default function Pricing() {
   const [annual, setAnnual] = useState(false);
 
   return (
-    <section id="precios" className="py-32 sm:py-40">
+    <section id="precios" className="py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -43,7 +43,7 @@ export default function Pricing() {
           className="mb-16"
         >
           <p className="mb-4 text-sm font-semibold tracking-[0.2em] text-cyan-400 uppercase">Precios</p>
-          <h2 className="mb-6 text-4xl font-black text-white sm:text-5xl lg:text-7xl">
+          <h2 className="mb-6 text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
             Un plan para cada<br />
             <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
               etapa de tu negocio.
@@ -108,7 +108,7 @@ export default function Pricing() {
                 <p className="mb-6 text-sm text-surface-500">{plan.description}</p>
 
                 <div className="mb-1 flex items-baseline gap-1 overflow-hidden">
-                  <span className="text-5xl font-black text-white">$</span>
+                  <span className="text-4xl font-extrabold text-white">$</span>
                   <AnimatePresence mode="popLayout">
                     <motion.span
                       key={price}
@@ -116,7 +116,7 @@ export default function Pricing() {
                       animate={{ y: 0, opacity: 1 }}
                       exit={{ y: -30, opacity: 0 }}
                       transition={{ duration: 0.3, ease: "easeInOut" }}
-                      className="inline-block text-5xl font-black text-white"
+                      className="inline-block text-4xl font-extrabold text-white"
                     >
                       {price}
                     </motion.span>

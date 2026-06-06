@@ -54,7 +54,7 @@ export default function Hero({ onStartOnboarding }: HeroProps) {
           </motion.div>
 
           {/* Headline */}
-          <h1 className="mb-8 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-5xl leading-none font-black tracking-tight sm:text-7xl md:text-8xl lg:text-9xl">
+          <h1 className="mb-8 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-4xl leading-tight font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
             {headlineWords.map((word, i) => (
               <motion.span
                 key={i}
@@ -88,7 +88,7 @@ export default function Hero({ onStartOnboarding }: HeroProps) {
           >
             <button
               onClick={onStartOnboarding}
-              className="group inline-flex items-center gap-3 rounded-xl bg-cyan-500 px-10 py-5 text-lg font-bold text-black transition-all hover:bg-cyan-400 hover:shadow-2xl hover:shadow-cyan-500/25"
+              className="group inline-flex items-center gap-3 rounded-xl bg-cyan-500 px-8 py-4 text-base font-semibold text-black transition-all hover:bg-cyan-400 hover:shadow-lg hover:shadow-cyan-500/20"
             >
               Comenzar Mi Proyecto
               <span className="inline-block transition-transform group-hover:translate-x-1">&rarr;</span>
@@ -96,7 +96,7 @@ export default function Hero({ onStartOnboarding }: HeroProps) {
 
             <button
               onClick={() => setVideoOpen(true)}
-              className="group inline-flex items-center gap-3 rounded-xl border border-surface-700 px-8 py-5 text-lg font-semibold text-surface-300 transition-all hover:border-surface-500 hover:text-white"
+              className="group inline-flex items-center gap-3 rounded-xl border border-surface-700 px-8 py-4 text-base font-medium text-surface-300 transition-all hover:border-surface-500 hover:text-white"
             >
               <Play className="h-5 w-5 text-cyan-400" />
               Ver en 60 segundos

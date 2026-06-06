@@ -8,7 +8,7 @@ interface CTAFinalProps {
 
 export default function CTAFinal({ onStartOnboarding }: CTAFinalProps) {
   return (
-    <section className="mesh-gradient relative flex min-h-[70vh] items-center justify-center overflow-hidden py-32">
+    <section className="mesh-gradient relative flex min-h-[60vh] items-center justify-center overflow-hidden py-24">
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute top-1/3 left-1/3 h-[500px] w-[500px] rounded-full bg-cyan-500/10 blur-[150px]" />
         <div className="absolute right-1/4 bottom-1/4 h-[400px] w-[400px] rounded-full bg-blue-500/8 blur-[120px]" />
@@ -30,7 +30,7 @@ export default function CTAFinal({ onStartOnboarding }: CTAFinalProps) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.1 }}
-          className="mb-8 text-4xl font-black text-white sm:text-6xl lg:text-8xl"
+          className="mb-8 text-3xl font-bold text-white sm:text-5xl lg:text-6xl"
         >
           ¿Listo para<br />
           <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
@@ -58,7 +58,7 @@ export default function CTAFinal({ onStartOnboarding }: CTAFinalProps) {
         >
           <button
             onClick={onStartOnboarding}
-            className="group inline-flex items-center gap-3 rounded-xl bg-cyan-500 px-10 py-5 text-lg font-bold text-black transition-all hover:bg-cyan-400 hover:shadow-2xl hover:shadow-cyan-500/25"
+            className="group inline-flex items-center gap-3 rounded-xl bg-cyan-500 px-8 py-4 text-base font-semibold text-black transition-all hover:bg-cyan-400 hover:shadow-lg hover:shadow-cyan-500/20"
           >
             Comenzar Mi Proyecto
             <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />

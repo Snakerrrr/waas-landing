@@ -38,7 +38,7 @@ function CompValue({ value }: { value: string | boolean }) {
 
 export default function Benefits() {
   return (
-    <section id="beneficios" className="py-32 sm:py-40">
+    <section id="beneficios" className="py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -46,10 +46,10 @@ export default function Benefits() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8 }}
-          className="mb-20"
+          className="mb-14"
         >
           <p className="mb-4 text-sm font-semibold tracking-[0.2em] text-cyan-400 uppercase">Beneficios</p>
-          <h2 className="text-4xl font-black text-white sm:text-5xl lg:text-7xl">
+          <h2 className="text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
             Todo incluido.<br />
             <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
               Cero sorpresas.
@@ -58,7 +58,7 @@ export default function Benefits() {
         </motion.div>
 
         {/* Benefits grid -- editorial 2-column */}
-        <div className="mb-32 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mb-24 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {benefits.map((b, i) => (
             <motion.div
               key={b.title}
@@ -84,7 +84,7 @@ export default function Benefits() {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <h3 className="mb-12 text-center text-3xl font-black text-white sm:text-4xl">
+          <h3 className="mb-10 text-center text-2xl font-bold text-white sm:text-3xl">
             Tradicional vs <span className="text-cyan-400">Modelo WaaS</span>
           </h3>
 

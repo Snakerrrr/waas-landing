@@ -33,29 +33,12 @@ html {
 
 body {
   font-family: var(--font-sans);
-  background-color: #0b1120;
+  background: 
+    radial-gradient(ellipse 80% 50% at 50% 0%, #1E1E24 0%, transparent 60%),
+    #0A0A0B;
   color: #e2e8f0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-/* ── Ambient light blob animations ── */
-@keyframes breathe1 {
-  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.35; }
-  30% { transform: translate(40px, 60px) scale(1.15); opacity: 0.45; }
-  60% { transform: translate(-30px, 30px) scale(0.9); opacity: 0.3; }
-}
-
-@keyframes breathe2 {
-  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.25; }
-  40% { transform: translate(-50px, -40px) scale(1.1); opacity: 0.35; }
-  70% { transform: translate(30px, -20px) scale(0.95); opacity: 0.2; }
-}
-
-@keyframes breathe3 {
-  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.2; }
-  35% { transform: translate(20px, -50px) scale(1.2); opacity: 0.3; }
-  65% { transform: translate(-40px, 20px) scale(0.85); opacity: 0.15; }
 }
 
 /* ── Glow effects ── */
@@ -141,7 +124,7 @@ body {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #0b1120;
+  background: #0A0A0B;
 }
 ::-webkit-scrollbar-thumb {
   background: rgba(56, 189, 248, 0.25);

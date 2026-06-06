@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import CalendlyButton from "./CalendlyButton";
 
 interface CTAFinalProps {
   onStartOnboarding: () => void;
@@ -48,17 +49,23 @@ export default function CTAFinal({ onStartOnboarding }: CTAFinalProps) {
           14 días de garantía de satisfacción.
         </motion.p>
 
-        <motion.button
-          onClick={onStartOnboarding}
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.5 }}
-          className="group inline-flex items-center gap-3 rounded-xl bg-cyan-500 px-10 py-5 text-lg font-bold text-black transition-all hover:bg-cyan-400 hover:shadow-2xl hover:shadow-cyan-500/25"
+          className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center"
         >
-          Comenzar Mi Proyecto
-          <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
-        </motion.button>
+          <button
+            onClick={onStartOnboarding}
+            className="group inline-flex items-center gap-3 rounded-xl bg-cyan-500 px-10 py-5 text-lg font-bold text-black transition-all hover:bg-cyan-400 hover:shadow-2xl hover:shadow-cyan-500/25"
+          >
+            Comenzar Mi Proyecto
+            <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+          </button>
+
+          <CalendlyButton />
+        </motion.div>
       </div>
     </section>
   );

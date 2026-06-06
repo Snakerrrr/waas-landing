@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ExternalLink, Clock, Bell, Eye, X } from "lucide-react";
+import { useTilt } from "../hooks/useTilt";
 
 type DemoStatus = "live" | "coming_soon";
 
@@ -136,15 +137,37 @@ export default function Demos() {
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           <AnimatePresence mode="popLayout">
             {filtered.map((demo) => (
-              <motion.div
-                key={demo.title}
-                layout
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.4 }}
-                className="group overflow-hidden rounded-2xl border border-surface-800 bg-surface-950 transition-all duration-300 hover:border-cyan-500/30 hover:shadow-lg hover:shadow-cyan-500/5"
-              >
+              <TiltCard key={demo.title} demo={demo} onWaitlist={() => setWaitlistDemo(demo)} />
+            ))}
+          </AnimatePresence>
+        </div>
+      </div>
+
+      <AnimatePresence>
+        {waitlistDemo && <WaitlistModal demo={waitlistDemo} onClose={() => setWaitlistDemo(null)} />}
+      </AnimatePresence>
+    </section>
+  );
+}
+
+function TiltCard({ demo, onWaitlist }: { demo: Demo; onWaitlist: () => void }) {
+  const tilt = useTilt<HTMLDivElement>();
+
+  return (
+    <motion.div
+      layout
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.95 }}
+      transition={{ duration: 0.4 }}
+    >
+      <div
+        ref={tilt.ref}
+        onMouseMove={tilt.onMouseMove}
+        onMouseLeave={tilt.onMouseLeave}
+        className="group overflow-hidden rounded-2xl border border-surface-800 bg-surface-950 transition-all duration-300 hover:border-cyan-500/30 hover:shadow-lg hover:shadow-cyan-500/5"
+        style={{ transformStyle: "preserve-3d", transition: "transform 0.15s ease-out" }}
+      >
                 {/* Preview */}
                 <div className={`relative h-48 bg-gradient-to-br ${demo.gradient} p-5`}>
                   <div className="h-full rounded-lg border border-white/5 bg-black/40 backdrop-blur-sm">
@@ -175,7 +198,7 @@ export default function Demos() {
                         <Eye className="h-4 w-4" /> Ver Demo
                       </a>
                     ) : (
-                      <button onClick={() => setWaitlistDemo(demo)}
+                      <button onClick={onWaitlist}
                         className="inline-flex items-center gap-2 rounded-lg bg-white px-5 py-2.5 text-sm font-bold text-black shadow-lg">
                         <Bell className="h-4 w-4" /> Avisarme
                       </button>
@@ -196,21 +219,13 @@ export default function Demos() {
                       <ExternalLink className="h-4 w-4" /> Ver en vivo
                     </a>
                   ) : (
-                    <button onClick={() => setWaitlistDemo(demo)}
+                    <button onClick={onWaitlist}
                       className="inline-flex items-center gap-2 text-sm font-semibold text-surface-500 transition-colors hover:text-cyan-400">
                       <Clock className="h-4 w-4" /> En desarrollo
                     </button>
                   )}
                 </div>
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </div>
       </div>
-
-      <AnimatePresence>
-        {waitlistDemo && <WaitlistModal demo={waitlistDemo} onClose={() => setWaitlistDemo(null)} />}
-      </AnimatePresence>
-    </section>
+    </motion.div>
   );
 }

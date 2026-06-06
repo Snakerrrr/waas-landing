@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Check, ArrowRight, Sparkles } from "lucide-react";
 
 interface Plan {
@@ -107,8 +107,20 @@ export default function Pricing() {
                 <h3 className="mb-1 text-lg font-bold text-white">{plan.name}</h3>
                 <p className="mb-6 text-sm text-surface-500">{plan.description}</p>
 
-                <div className="mb-1 flex items-baseline gap-1">
-                  <span className="text-5xl font-black text-white">${price}</span>
+                <div className="mb-1 flex items-baseline gap-1 overflow-hidden">
+                  <span className="text-5xl font-black text-white">$</span>
+                  <AnimatePresence mode="popLayout">
+                    <motion.span
+                      key={price}
+                      initial={{ y: 30, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      exit={{ y: -30, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                      className="inline-block text-5xl font-black text-white"
+                    >
+                      {price}
+                    </motion.span>
+                  </AnimatePresence>
                   <span className="text-surface-500">/mes</span>
                 </div>
                 {annual && (

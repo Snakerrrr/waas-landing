@@ -8,7 +8,6 @@ import Marquee from "./components/Marquee";
 import HowItWorks from "./components/HowItWorks";
 import Demos from "./components/Demos";
 import Benefits from "./components/Benefits";
-import BeforeAfter from "./components/BeforeAfter";
 import Testimonials from "./components/Testimonials";
 import Pricing from "./components/Pricing";
 import FAQ from "./components/FAQ";
@@ -33,9 +32,8 @@ export default function App() {
             <Marquee />
             <HowItWorks />
             <Demos />
-            <Benefits />
-            <BeforeAfter />
-            <Testimonials />
+          <Benefits />
+          <Testimonials />
             <Pricing />
             <FAQ />
             <CTAFinal onStartOnboarding={openOnboarding} />

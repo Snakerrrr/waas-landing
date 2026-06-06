@@ -19,26 +19,56 @@ const benefits = [
 ];
 
 const traditionalPains = [
-  "Costo inicial $3,000–$10,000",
-  "Hosting aparte (costo extra)",
+  "Inversión inicial de $3,000–$10,000",
+  "Meses de espera para resultados",
+  "Sin soporte después de la entrega",
+  "Hosting, SSL y mantenimiento aparte",
   "Cambios: $50–$150 cada uno",
-  "Soporte: pago por hora",
-  "Actualizaciones: tú te encargas",
   "Backups: manual o inexistente",
-  "SSL: costo extra",
-  "Resultado: meses de espera",
 ];
 
 const waasPerks = [
-  "Costo inicial: $0",
-  "Hosting premium incluido",
-  "Cambios ilimitados",
-  "Soporte ilimitado",
+  "Costo inicial: $0, todo por suscripción",
+  "Tu web lista en 48 horas",
+  "Soporte y cambios ilimitados",
+  "Hosting, SSL y backups incluidos",
   "Actualizaciones automáticas",
-  "Backups diarios",
-  "SSL incluido",
-  "Tu web lista en 48h",
+  "SEO optimizado desde el día uno",
 ];
+
+function BadMockupMini() {
+  return (
+    <div className="rounded-lg border border-red-500/10 bg-surface-900/60 p-1 opacity-60 grayscale">
+      <div className="flex items-center gap-1 border-b border-red-500/5 px-2 py-1.5">
+        <div className="h-1.5 w-1.5 rounded-full bg-red-400/30" />
+        <div className="h-1.5 w-1.5 rounded-full bg-red-400/30" />
+        <div className="h-1.5 w-1.5 rounded-full bg-red-400/30" />
+      </div>
+      <div className="space-y-1.5 p-2.5">
+        <div className="h-10 w-full rounded bg-surface-800/50" />
+        <div className="h-2 w-3/4 rounded bg-surface-800/40" />
+        <div className="h-2 w-1/2 rounded bg-surface-800/30" />
+        <div className="flex gap-1.5"><div className="h-4 w-12 rounded bg-red-500/10" /><div className="h-4 w-10 rounded bg-surface-800/30" /></div>
+      </div>
+    </div>
+  );
+}
+
+function GoodMockupMini() {
+  return (
+    <div className="rounded-lg border border-cyan-500/15 bg-surface-800/60 p-1 glow-cyan">
+      <div className="flex items-center gap-1 border-b border-cyan-500/10 px-2 py-1.5">
+        <div className="h-1.5 w-1.5 rounded-full bg-cyan-400/50" />
+        <div className="h-1.5 w-1.5 rounded-full bg-cyan-400/30" />
+        <div className="h-1.5 w-1.5 rounded-full bg-cyan-400/30" />
+      </div>
+      <div className="space-y-1.5 p-2.5">
+        <div className="rounded bg-gradient-to-r from-cyan-500/10 to-blue-500/10 p-2.5"><div className="mb-1 h-2.5 w-2/3 rounded bg-white/15" /><div className="h-1.5 w-full rounded bg-white/8" /><div className="mt-1.5 h-4 w-14 rounded bg-cyan-500/30" /></div>
+        <div className="grid grid-cols-3 gap-1">{[1,2,3].map(k=>(<div key={k} className="rounded border border-cyan-500/10 p-1.5"><div className="h-1.5 w-2 rounded bg-cyan-500/25" /><div className="mt-1 h-1 w-full rounded bg-surface-700" /></div>))}</div>
+      </div>
+    </div>
+  );
+}
 
 function ComparisonCards() {
   const waasRef = useRef<HTMLDivElement>(null);
@@ -64,10 +94,10 @@ function ComparisonCards() {
       transition={{ duration: 0.8 }}
     >
       <div className="mb-12 text-center">
-        <p className="mb-4 text-xs font-medium tracking-[0.3em] text-cyan-400/70 uppercase">Comparativa</p>
+        <p className="mb-4 text-xs font-medium tracking-[0.3em] text-cyan-400/70 uppercase">¿Por qué cambiar?</p>
         <h3 className="text-4xl sm:text-5xl md:text-6xl">
-          <span className="font-extralight tracking-tight text-surface-400">Tradicional </span>
-          <span className="font-extrabold tracking-tight text-white">vs WaaS</span>
+          <span className="font-extralight tracking-tight text-surface-400">Agencia tradicional </span>
+          <span className="font-extrabold tracking-tight text-white">vs WebFlowStudio</span>
         </h3>
       </div>
 
@@ -95,6 +125,10 @@ function ComparisonCards() {
               <h4 className="font-bold text-surface-400">Agencia Tradicional</h4>
               <p className="text-xs text-surface-600">El modelo que ya conoces</p>
             </div>
+          </div>
+
+          <div className="mb-6">
+            <BadMockupMini />
           </div>
 
           <ul className="space-y-3">
@@ -144,6 +178,10 @@ function ComparisonCards() {
                 <h4 className="font-bold text-white">Modelo WaaS</h4>
                 <p className="text-xs text-cyan-400/60">La forma inteligente</p>
               </div>
+            </div>
+
+            <div className="mb-6">
+              <GoodMockupMini />
             </div>
 
             <ul className="space-y-3">

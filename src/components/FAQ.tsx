@@ -20,10 +20,12 @@ function AccordionItem({ faq, isOpen, onClick, index }: { faq: (typeof faqs)[0];
 
   return (
     <motion.div initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.35, delay: index * 0.04 }}
-      className="border-b border-surface-800/60">
-      <button onClick={onClick} className="flex w-full items-center justify-between py-5 text-left">
-        <span className={`pr-4 text-base font-semibold transition-colors sm:text-lg ${isOpen ? "text-cyan-400" : "text-white"}`}>{faq.question}</span>
-        <Plus className={`h-5 w-5 shrink-0 text-surface-500 transition-transform duration-300 ${isOpen ? "rotate-45 text-cyan-400" : ""}`} />
+      className={`border-b transition-colors duration-300 ${isOpen ? "border-cyan-500/20" : "border-surface-800/40"}`}>
+      <button onClick={onClick} className="group flex w-full items-center justify-between py-5 text-left">
+        <span className={`pr-4 text-base font-semibold transition-all duration-300 sm:text-lg ${isOpen ? "text-cyan-400" : "text-white group-hover:text-cyan-400/70 group-hover:translate-x-1"}`}>{faq.question}</span>
+        <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg transition-all duration-300 ${isOpen ? "bg-cyan-500/10 rotate-45" : "bg-transparent group-hover:bg-surface-800"}`}>
+          <Plus className={`h-4 w-4 transition-colors duration-300 ${isOpen ? "text-cyan-400" : "text-surface-500 group-hover:text-surface-300"}`} />
+        </div>
       </button>
       <div className="overflow-hidden transition-all duration-300 ease-in-out" style={{ maxHeight: h }}>
         <div ref={ref} className="pb-5"><p className="max-w-xl text-sm leading-relaxed text-surface-400">{faq.answer}</p></div>

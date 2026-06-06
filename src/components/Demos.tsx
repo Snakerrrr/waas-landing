@@ -78,11 +78,11 @@ function DemoCard({ demo, index, onWaitlist }: { demo: Demo; index: number; onWa
         ref={tilt.ref}
         onMouseMove={tilt.onMouseMove}
         onMouseLeave={tilt.onMouseLeave}
-        className="group h-full overflow-hidden glass rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:border-white/10 hover:shadow-xl hover:shadow-cyan-500/5"
+        className="group h-full overflow-hidden glass rounded-2xl transition-all duration-300 ease-out hover:-translate-y-1 hover:border-white/20 hover:shadow-xl hover:shadow-cyan-500/5"
         style={{ transformStyle: "preserve-3d", transition: "transform 0.15s ease-out" }}
       >
-        <div className={`relative bg-gradient-to-br ${demo.gradient} ${isFirst ? "h-56 sm:h-72" : "h-44"} p-5`}>
-          <div className={`h-full rounded-lg border border-white/5 bg-black/40 backdrop-blur-sm ${isFirst ? "-translate-y-2" : ""}`}>
+        <div className={`relative overflow-hidden bg-gradient-to-br ${demo.gradient} ${isFirst ? "h-56 sm:h-72" : "h-44"} p-5`}>
+          <div className={`h-full rounded-lg border border-white/5 bg-black/40 backdrop-blur-sm transition-transform duration-500 ease-out group-hover:scale-[1.03] ${isFirst ? "-translate-y-2" : ""}`}>
             <div className="flex items-center gap-1.5 border-b border-white/5 px-3 py-2">
               <div className="h-2 w-2 rounded-full bg-surface-600" />
               <div className="h-2 w-2 rounded-full bg-surface-600" />
@@ -120,11 +120,11 @@ function DemoCard({ demo, index, onWaitlist }: { demo: Demo; index: number; onWa
           <p className="mb-3 text-sm leading-relaxed text-surface-400">{demo.description}</p>
           {demo.status === "live" ? (
             <a href={demo.url!} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm font-medium text-cyan-400 hover:text-cyan-300">
-              <ExternalLink className="h-3.5 w-3.5" /> Ver en vivo
+                    <ExternalLink className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5" /> Ver en vivo
             </a>
           ) : (
             <button onClick={onWaitlist} className="inline-flex items-center gap-1.5 text-sm font-medium text-surface-500 hover:text-cyan-400">
-              <Clock className="h-3.5 w-3.5" /> En desarrollo
+                    <Clock className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5" /> En desarrollo
             </button>
           )}
         </div>

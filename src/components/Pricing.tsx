@@ -46,10 +46,10 @@ export default function Pricing() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                className={`relative rounded-2xl border p-8 transition-all duration-300 ${
+                className={`group relative rounded-2xl border p-8 transition-all duration-300 ease-out ${
                   plan.popular
-                    ? "z-10 glass border-cyan-500/20 shadow-xl shadow-cyan-500/5 glow-pulse lg:-translate-y-4 lg:scale-[1.03]"
-                    : "glass opacity-[0.97] hover:border-white/10"
+                    ? "z-10 glass border-cyan-500/20 shadow-xl shadow-cyan-500/5 glow-pulse lg:-translate-y-4 lg:scale-[1.03] hover:border-cyan-500/30"
+                    : "glass opacity-[0.97] hover:-translate-y-0.5 hover:border-white/20 hover:shadow-lg hover:shadow-white/[0.02]"
                 }`}
               >
                 {plan.popular && (
@@ -84,7 +84,7 @@ export default function Pricing() {
                 <ul className="space-y-2.5">
                   {plan.features.map((f) => (
                     <li key={f} className="flex items-start gap-2.5">
-                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-cyan-400" />
+                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-cyan-400 transition-colors duration-300 group-hover:text-cyan-300" />
                       <span className="text-sm text-surface-300">{f}</span>
                     </li>
                   ))}

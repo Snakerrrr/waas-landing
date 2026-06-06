@@ -85,7 +85,7 @@ function ComparisonCards() {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="group rounded-2xl border border-surface-800/60 bg-surface-950/60 p-8 transition-all duration-300 hover:bg-surface-900/80 lg:rounded-r-none lg:pr-12"
+          className="group rounded-2xl border border-surface-800/60 bg-surface-950/60 p-8 transition-all duration-300 ease-out hover:border-surface-700 hover:bg-surface-900/80 lg:rounded-r-none lg:pr-12"
         >
           <div className="mb-6 flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-surface-800">
@@ -185,10 +185,10 @@ export default function Benefits() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.06 }}
-                className={`group glass rounded-2xl transition-all duration-300 hover:border-white/10 ${b.span} ${isLarge ? "p-8" : "p-6"}`}
+                className={`group glass rounded-2xl transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-white/20 hover:shadow-lg hover:shadow-white/[0.02] ${b.span} ${isLarge ? "p-8" : "p-6"}`}
               >
-                <div className={`mb-4 flex items-center justify-center rounded-xl border border-cyan-500/20 bg-cyan-500/5 ${isLarge ? "h-14 w-14" : "h-11 w-11"}`}>
-                  <b.icon className={`text-cyan-400 ${isLarge ? "h-7 w-7" : "h-5 w-5"}`} />
+                <div className={`mb-4 flex items-center justify-center rounded-xl border border-cyan-500/20 bg-cyan-500/5 transition-colors duration-300 group-hover:border-cyan-500/30 group-hover:bg-cyan-500/10 ${isLarge ? "h-14 w-14" : "h-11 w-11"}`}>
+                  <b.icon className={`text-cyan-400 transition-transform duration-300 group-hover:scale-110 ${isLarge ? "h-7 w-7" : "h-5 w-5"}`} />
                 </div>
                 <h3 className={`mb-2 font-bold text-white ${isLarge ? "text-xl" : "text-base"}`}>{b.title}</h3>
                 <p className={`leading-relaxed text-surface-400 ${isLarge ? "text-base" : "text-sm"}`}>{b.description}</p>

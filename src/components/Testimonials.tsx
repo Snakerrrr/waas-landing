@@ -59,7 +59,7 @@ export default function Testimonials() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.07 }}
-              className="glass rounded-2xl p-6 transition-all duration-300 hover:border-white/10"
+              className="group glass rounded-2xl p-6 transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-white/20 hover:shadow-lg hover:shadow-white/[0.02]"
             >
               <div className="mb-4 flex gap-1">
                 {[...Array(5)].map((_, j) => <Star key={j} className="h-3.5 w-3.5 fill-cyan-400 text-cyan-400" />)}

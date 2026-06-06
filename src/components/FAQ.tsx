@@ -42,12 +42,12 @@ export default function FAQ() {
         <div className="lg:grid lg:grid-cols-[1fr_2fr] lg:gap-16">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}
             className="mb-10 lg:sticky lg:top-32 lg:mb-0 lg:self-start">
-            <p className="mb-3 text-sm font-semibold tracking-[0.2em] text-cyan-400 uppercase">FAQ</p>
-            <h2 className="text-3xl sm:text-4xl">
-              <span className="font-light text-surface-300">Preguntas</span><br />
-              <span className="font-extrabold text-white">Frecuentes.</span>
+            <p className="mb-4 text-xs font-medium tracking-[0.3em] text-cyan-400/70 uppercase">FAQ</p>
+            <h2 className="text-4xl sm:text-5xl md:text-6xl">
+              <span className="block font-extralight tracking-tight text-surface-400">Preguntas</span>
+              <span className="block font-extrabold tracking-tight text-white">Frecuentes.</span>
             </h2>
-            <p className="mt-4 text-sm text-surface-500">Todo lo que necesitas saber antes de empezar.</p>
+            <p className="mt-5 text-base text-surface-500">Todo lo que necesitas saber antes de empezar.</p>
           </motion.div>
 
           <div>

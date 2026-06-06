@@ -15,18 +15,18 @@ export default function CTAFinal({ onStartOnboarding }: CTAFinalProps) {
       <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
         <div className="max-w-2xl">
           <motion.p initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
-            className="mb-5 text-sm font-semibold tracking-[0.2em] text-cyan-400 uppercase">
+            className="mb-4 text-xs font-medium tracking-[0.3em] text-cyan-400/70 uppercase">
             Lanza tu web esta semana
           </motion.p>
 
           <motion.h2 initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.1 }}
-            className="mb-6 text-3xl sm:text-5xl lg:text-6xl">
-            <span className="font-light text-surface-300">¿Listo para</span><br />
-            <span className="font-extrabold text-white">empezar?</span>
+            className="mb-6 text-4xl sm:text-5xl md:text-6xl">
+            <span className="block font-extralight tracking-tight text-surface-400">¿Listo para</span>
+            <span className="block font-extrabold tracking-tight text-white">empezar?</span>
           </motion.h2>
 
           <motion.p initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.3 }}
-            className="mb-10 max-w-lg text-base text-surface-400">
+            className="mb-10 max-w-lg text-base text-surface-500">
             Únete a más de 200 negocios que ya dejaron de preocuparse por su web. 14 días de garantía.
           </motion.p>
 

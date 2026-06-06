@@ -64,8 +64,10 @@ function ComparisonCards() {
       transition={{ duration: 0.8 }}
     >
       <div className="mb-12 text-center">
-        <h3 className="text-3xl font-light text-surface-300 sm:text-4xl">
-          Tradicional <span className="font-extrabold text-white">vs WaaS</span>
+        <p className="mb-4 text-xs font-medium tracking-[0.3em] text-cyan-400/70 uppercase">Comparativa</p>
+        <h3 className="text-4xl sm:text-5xl md:text-6xl">
+          <span className="font-extralight tracking-tight text-surface-400">Tradicional </span>
+          <span className="font-extrabold tracking-tight text-white">vs WaaS</span>
         </h3>
       </div>
 

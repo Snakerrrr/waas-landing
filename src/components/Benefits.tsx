@@ -10,6 +10,7 @@ import {
   X,
   Check,
 } from "lucide-react";
+import { useScrollReveal } from "../hooks/useScrollReveal";
 
 const benefits = [
   { icon: CreditCard, title: "Sin Inversión Inicial", description: "Olvídate de pagar $3,000–$10,000 de golpe. Empieza con una cuota mensual accesible." },
@@ -45,11 +46,13 @@ function ComparisonValue({ value }: { value: string | boolean }) {
 }
 
 export default function Benefits() {
+  const { ref, isVisible } = useScrollReveal<HTMLElement>();
+
   return (
-    <section id="beneficios" className="py-20 sm:py-28">
+    <section id="beneficios" ref={ref} className="py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="mx-auto mb-16 max-w-2xl text-center">
+        <div className={`mx-auto mb-16 max-w-2xl text-center transition-all duration-700 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"}`}>
           <p className="mb-3 text-sm font-semibold tracking-wider text-primary-500 uppercase">
             Por qué elegirnos
           </p>
@@ -64,10 +67,11 @@ export default function Benefits() {
 
         {/* Benefits Grid */}
         <div className="mb-20 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {benefits.map((b) => (
+          {benefits.map((b, i) => (
             <div
               key={b.title}
-              className="rounded-2xl border border-surface-200 bg-white p-6 transition-all hover:border-primary-200 hover:shadow-lg dark:border-surface-800 dark:bg-surface-900 dark:hover:border-primary-500/30"
+              className={`rounded-2xl border border-surface-200 bg-white p-6 transition-all duration-700 hover:border-primary-200 hover:shadow-lg dark:border-surface-800 dark:bg-surface-900 dark:hover:border-primary-500/30 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"}`}
+              style={{ transitionDelay: `${(i + 1) * 100}ms` }}
             >
               <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-primary-50 dark:bg-primary-500/10">
                 <b.icon className="h-5 w-5 text-primary-600 dark:text-primary-400" />

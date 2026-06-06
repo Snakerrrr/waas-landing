@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { ChevronDown } from "lucide-react";
+import { useScrollReveal } from "../hooks/useScrollReveal";
 
 const faqs = [
   {
@@ -44,14 +45,60 @@ const faqs = [
   },
 ];
 
-export default function FAQ() {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
+function AccordionItem({ faq, isOpen, onClick, index, sectionVisible }: {
+  faq: (typeof faqs)[0];
+  isOpen: boolean;
+  onClick: () => void;
+  index: number;
+  sectionVisible: boolean;
+}) {
+  const contentRef = useRef<HTMLDivElement>(null);
+  const [height, setHeight] = useState(0);
+
+  useEffect(() => {
+    if (contentRef.current) {
+      setHeight(isOpen ? contentRef.current.scrollHeight : 0);
+    }
+  }, [isOpen]);
 
   return (
-    <section id="faq" className="py-20 sm:py-28">
+    <div
+      className={`overflow-hidden rounded-xl border transition-all duration-500 ${
+        isOpen
+          ? "border-primary-200 bg-primary-50/50 dark:border-primary-500/30 dark:bg-primary-500/5"
+          : "border-surface-200 bg-white dark:border-surface-800 dark:bg-surface-900"
+      } ${sectionVisible ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"}`}
+      style={{ transitionDelay: `${index * 75}ms` }}
+    >
+      <button
+        onClick={onClick}
+        className="flex w-full items-center justify-between px-6 py-5 text-left"
+      >
+        <span className="pr-4 font-semibold text-surface-900 dark:text-white">{faq.question}</span>
+        <ChevronDown
+          className={`h-5 w-5 shrink-0 text-surface-400 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
+        />
+      </button>
+      <div
+        className="overflow-hidden transition-all duration-300 ease-in-out"
+        style={{ maxHeight: height }}
+      >
+        <div ref={contentRef} className="px-6 pb-5">
+          <p className="leading-relaxed text-surface-600 dark:text-surface-400">{faq.answer}</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default function FAQ() {
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const { ref, isVisible } = useScrollReveal<HTMLElement>();
+
+  return (
+    <section id="faq" ref={ref} className="py-20 sm:py-28">
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="mb-12 text-center">
+        <div className={`mb-12 text-center transition-all duration-700 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"}`}>
           <p className="mb-3 text-sm font-semibold tracking-wider text-primary-500 uppercase">
             FAQ
           </p>
@@ -63,36 +110,17 @@ export default function FAQ() {
           </p>
         </div>
 
-        {/* Accordion */}
         <div className="space-y-3">
-          {faqs.map((faq, i) => {
-            const isOpen = openIndex === i;
-            return (
-              <div
-                key={i}
-                className={`overflow-hidden rounded-xl border transition-all ${
-                  isOpen
-                    ? "border-primary-200 bg-primary-50/50 dark:border-primary-500/30 dark:bg-primary-500/5"
-                    : "border-surface-200 bg-white dark:border-surface-800 dark:bg-surface-900"
-                }`}
-              >
-                <button
-                  onClick={() => setOpenIndex(isOpen ? null : i)}
-                  className="flex w-full items-center justify-between px-6 py-5 text-left"
-                >
-                  <span className="pr-4 font-semibold text-surface-900 dark:text-white">{faq.question}</span>
-                  <ChevronDown
-                    className={`h-5 w-5 shrink-0 text-surface-400 transition-transform ${isOpen ? "rotate-180" : ""}`}
-                  />
-                </button>
-                {isOpen && (
-                  <div className="px-6 pb-5">
-                    <p className="leading-relaxed text-surface-600 dark:text-surface-400">{faq.answer}</p>
-                  </div>
-                )}
-              </div>
-            );
-          })}
+          {faqs.map((faq, i) => (
+            <AccordionItem
+              key={i}
+              faq={faq}
+              isOpen={openIndex === i}
+              onClick={() => setOpenIndex(openIndex === i ? null : i)}
+              index={i}
+              sectionVisible={isVisible}
+            />
+          ))}
         </div>
       </div>
     </section>

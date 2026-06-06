@@ -5,6 +5,7 @@ import LogosBar from "./components/LogosBar";
 import HowItWorks from "./components/HowItWorks";
 import Demos from "./components/Demos";
 import Benefits from "./components/Benefits";
+import Testimonials from "./components/Testimonials";
 import Pricing from "./components/Pricing";
 import FAQ from "./components/FAQ";
 import CTAFinal from "./components/CTAFinal";
@@ -24,6 +25,7 @@ export default function App() {
         <HowItWorks />
         <Demos />
         <Benefits />
+        <Testimonials />
         <Pricing />
         <FAQ />
         <CTAFinal onStartOnboarding={() => setShowOnboarding(true)} />

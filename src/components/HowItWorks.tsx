@@ -1,4 +1,5 @@
 import { MousePointerClick, Paintbrush, Rocket, Wrench } from "lucide-react";
+import { useScrollReveal } from "../hooks/useScrollReveal";
 
 const steps = [
   {
@@ -44,11 +45,13 @@ const steps = [
 ];
 
 export default function HowItWorks() {
+  const { ref, isVisible } = useScrollReveal<HTMLElement>();
+
   return (
-    <section id="como-funciona" className="py-20 sm:py-28">
+    <section id="como-funciona" ref={ref} className="py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="mx-auto mb-16 max-w-2xl text-center">
+        <div className={`mx-auto mb-16 max-w-2xl text-center transition-all duration-700 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"}`}>
           <p className="mb-3 text-sm font-semibold tracking-wider text-primary-500 uppercase">
             Proceso Simple
           </p>
@@ -62,10 +65,11 @@ export default function HowItWorks() {
 
         {/* Steps Grid */}
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-          {steps.map((s) => (
+          {steps.map((s, i) => (
             <div
               key={s.step}
-              className="group relative rounded-2xl border border-surface-200 bg-white p-8 transition-all hover:border-primary-200 hover:shadow-xl hover:shadow-primary-500/5 dark:border-surface-800 dark:bg-surface-900 dark:hover:border-primary-500/30"
+              className={`group relative rounded-2xl border border-surface-200 bg-white p-8 transition-all duration-700 hover:border-primary-200 hover:shadow-xl hover:shadow-primary-500/5 dark:border-surface-800 dark:bg-surface-900 dark:hover:border-primary-500/30 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"}`}
+              style={{ transitionDelay: `${(i + 1) * 150}ms` }}
             >
               <div className="mb-5 flex items-center justify-between">
                 <div className={`flex h-12 w-12 items-center justify-center rounded-xl ${s.bgColor}`}>

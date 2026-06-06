@@ -33,9 +33,11 @@ html {
 
 body {
   font-family: var(--font-sans);
-  background: 
-    radial-gradient(ellipse 80% 50% at 50% 0%, #1E1E24 0%, transparent 60%),
-    #0A0A0B;
+  background-color: #0B0F19;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 64px 64px;
   color: #e2e8f0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -99,19 +101,15 @@ body {
   animation: float 12s ease-in-out infinite;
 }
 
-/* ── Glassmorphism ── */
+/* ── Card surfaces (Stripe-style) ── */
 .glass {
-  background: rgba(22, 32, 50, 0.6);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: #1E293B;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .glass-light {
-  background: rgba(30, 41, 59, 0.4);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  background: #162032;
+  border: 1px solid rgba(255, 255, 255, 0.07);
 }
 
 /* ── Scroll progress ── */
@@ -124,7 +122,7 @@ body {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #0A0A0B;
+  background: #0B0F19;
 }
 ::-webkit-scrollbar-thumb {
   background: rgba(56, 189, 248, 0.25);

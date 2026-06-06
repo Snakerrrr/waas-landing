@@ -74,7 +74,7 @@ function ComparisonCards() {
       <div className="relative mx-auto grid max-w-5xl items-stretch gap-6 lg:grid-cols-2 lg:gap-0">
         {/* VS badge floating center */}
         <div className="pointer-events-none absolute inset-0 z-20 hidden items-center justify-center lg:flex">
-          <div className="flex h-16 w-16 items-center justify-center rounded-full border border-white/10 bg-black text-xl font-black text-white shadow-2xl">
+          <div className="flex h-16 w-16 items-center justify-center rounded-full border border-white/10 bg-surface-950 text-xl font-black text-white shadow-2xl">
             VS
           </div>
         </div>
@@ -116,7 +116,7 @@ function ComparisonCards() {
 
         {/* VS badge mobile */}
         <div className="flex items-center justify-center lg:hidden">
-          <div className="flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-black text-sm font-black text-white">
+          <div className="flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-surface-950 text-sm font-black text-white">
             VS
           </div>
         </div>

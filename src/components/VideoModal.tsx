@@ -36,7 +36,7 @@ export default function VideoModal({ isOpen, onClose }: Props) {
               Cerrar <X className="h-5 w-5" />
             </button>
 
-            <div className="overflow-hidden rounded-2xl border border-surface-800 bg-black">
+            <div className="overflow-hidden rounded-2xl border border-surface-800 bg-surface-950">
               <div className="relative aspect-video">
                 <iframe
                   src={VIDEO_URL}

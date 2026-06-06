@@ -27,7 +27,7 @@ export default function Pricing() {
         <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2 }} className="mb-12 flex items-center gap-4">
           <span className={`text-sm font-medium ${!annual ? "text-white" : "text-surface-500"}`}>Mensual</span>
           <button onClick={() => setAnnual(!annual)} className={`relative h-7 w-12 rounded-full transition-colors ${annual ? "bg-cyan-500" : "bg-surface-700"}`}>
-            <span className={`absolute top-0.5 left-0.5 h-6 w-6 rounded-full bg-black transition-transform ${annual ? "translate-x-5" : ""}`} />
+            <span className={`absolute top-0.5 left-0.5 h-6 w-6 rounded-full bg-surface-950 transition-transform ${annual ? "translate-x-5" : ""}`} />
           </button>
           <span className={`text-sm font-medium ${annual ? "text-white" : "text-surface-500"}`}>Anual</span>
           {annual && <span className="rounded-full bg-cyan-500/10 px-3 py-1 text-xs font-bold text-cyan-400 ring-1 ring-cyan-500/20">-20%</span>}

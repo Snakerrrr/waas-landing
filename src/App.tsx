@@ -22,7 +22,7 @@ export default function App() {
 
   return (
     <SmoothScroll>
-      <div className="aurora-bg relative min-h-screen text-surface-200">
+      <div className="aurora-bg relative min-h-screen bg-surface-950 text-surface-200">
         <Navbar onStartOnboarding={openOnboarding} />
         <UrgencyBanner onStartOnboarding={openOnboarding} />
         <main>

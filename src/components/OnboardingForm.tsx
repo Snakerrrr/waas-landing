@@ -23,7 +23,7 @@ const demoOptions = ["Bella Cucina (Restaurantes)", "ShopNova (E-Commerce)", "Le
 const pageOptions = ["Inicio", "Sobre Nosotros", "Servicios", "Portafolio", "Blog", "Contacto", "Tienda Online", "Reservas", "Testimonios", "FAQ"];
 const steps = [{ title: "Tu Negocio", icon: Building2 }, { title: "Diseño", icon: Palette }, { title: "Contenido", icon: FileText }, { title: "Confirmar", icon: CheckCircle2 }];
 
-const inputClass = "w-full rounded-xl border border-surface-800 bg-black px-4 py-3 text-white placeholder-surface-600 outline-none transition-all focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20";
+const inputClass = "w-full rounded-xl border border-surface-800 bg-surface-950 px-4 py-3 text-white placeholder-surface-600 outline-none transition-all focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20";
 const pillClass = (active: boolean) => `rounded-lg border px-3 py-2.5 text-left text-sm font-medium transition-all ${active ? "border-cyan-500 bg-cyan-500/10 text-cyan-400" : "border-surface-800 text-surface-400 hover:border-surface-600"}`;
 
 export default function OnboardingForm({ onClose }: { onClose: () => void }) {
@@ -128,7 +128,7 @@ export default function OnboardingForm({ onClose }: { onClose: () => void }) {
             {step === 3 && (
               <div className="space-y-4">
                 <h3 className="text-lg font-bold text-white">Resumen</h3>
-                <div className="space-y-3 rounded-xl border border-surface-800 bg-black p-5">
+                <div className="space-y-3 rounded-xl border border-surface-800 bg-surface-950 p-5">
                   {([["Nombre", data.fullName], ["Negocio", data.businessName], ["Industria", data.industry], ["Email", data.email], ["Teléfono", data.phone || "—"], ["Demo", data.preferredDemo], ["Colores", data.brandColors || "—"], ["Logo", data.hasLogo || "—"], ["Páginas", data.pages.join(", ") || "—"], ["Contenido", data.contentReady || "—"]] as [string, string][]).map(([label, value]) => (
                     <div key={label} className="flex justify-between text-sm"><span className="text-surface-500">{label}</span><span className="max-w-[60%] text-right text-white">{value}</span></div>
                   ))}

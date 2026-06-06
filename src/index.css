@@ -3,25 +3,28 @@
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
 
-  --color-cyan-400: #22d3ee;
-  --color-cyan-500: #06b6d4;
-  --color-cyan-600: #0891b2;
+  /* Accent -- Ice Blue */
+  --color-cyan-400: #56ccf2;
+  --color-cyan-500: #38bdf8;
+  --color-cyan-600: #0ea5e9;
 
-  --color-blue-400: #60a5fa;
-  --color-blue-500: #3b82f6;
-  --color-blue-600: #2563eb;
+  /* Accent -- Soft Violet */
+  --color-blue-400: #a5b4fc;
+  --color-blue-500: #818cf8;
+  --color-blue-600: #6366f1;
 
-  --color-surface-50: #f8fafc;
-  --color-surface-100: #f1f5f9;
-  --color-surface-200: #e2e8f0;
-  --color-surface-300: #cbd5e1;
-  --color-surface-400: #94a3b8;
-  --color-surface-500: #64748b;
-  --color-surface-600: #475569;
-  --color-surface-700: #334155;
-  --color-surface-800: #1e293b;
+  /* Surface -- Midnight Slate */
+  --color-surface-50: #f1f5f9;
+  --color-surface-100: #e2e8f0;
+  --color-surface-200: #cbd5e1;
+  --color-surface-300: #94a3b8;
+  --color-surface-400: #64748b;
+  --color-surface-500: #475569;
+  --color-surface-600: #334155;
+  --color-surface-700: #1e293b;
+  --color-surface-800: #162032;
   --color-surface-900: #0f172a;
-  --color-surface-950: #020617;
+  --color-surface-950: #0b1120;
 }
 
 html {
@@ -30,7 +33,7 @@ html {
 
 body {
   font-family: var(--font-sans);
-  background-color: #000000;
+  background-color: #0b1120;
   color: #e2e8f0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -58,30 +61,30 @@ body {
 .aurora-bg {
   background:
     radial-gradient(ellipse 80% 60% at var(--aurora-x1, 30%) var(--aurora-y1, 30%),
-      rgba(88, 28, 135, 0.35) 0%, transparent 60%),
+      rgba(56, 189, 248, 0.12) 0%, transparent 60%),
     radial-gradient(ellipse 70% 50% at var(--aurora-x2, 70%) var(--aurora-y2, 60%),
-      rgba(37, 99, 235, 0.3) 0%, transparent 55%),
+      rgba(129, 140, 248, 0.1) 0%, transparent 55%),
     radial-gradient(ellipse 60% 70% at var(--aurora-x3, 50%) var(--aurora-y3, 80%),
-      rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+      rgba(56, 189, 248, 0.06) 0%, transparent 50%),
     radial-gradient(ellipse 90% 40% at 20% 90%,
-      rgba(88, 28, 135, 0.12) 0%, transparent 50%),
-    #000000;
+      rgba(129, 140, 248, 0.06) 0%, transparent 50%),
+    #0b1120;
   background-size: 200% 200%, 200% 200%, 200% 200%, 100% 100%, 100% 100%;
   animation: aurora 25s ease-in-out infinite;
 }
 
 /* ── Glow effects ── */
 .glow-cyan {
-  box-shadow: 0 0 20px rgba(6, 182, 212, 0.3), 0 0 60px rgba(6, 182, 212, 0.1);
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.25), 0 0 60px rgba(56, 189, 248, 0.08);
 }
 
 .glow-cyan-strong {
-  box-shadow: 0 0 30px rgba(6, 182, 212, 0.4), 0 0 80px rgba(6, 182, 212, 0.15);
+  box-shadow: 0 0 30px rgba(56, 189, 248, 0.35), 0 0 80px rgba(56, 189, 248, 0.12);
 }
 
 @keyframes glowPulse {
-  0%, 100% { box-shadow: 0 0 15px rgba(6, 182, 212, 0.12), 0 0 40px rgba(6, 182, 212, 0.04); }
-  50% { box-shadow: 0 0 20px rgba(6, 182, 212, 0.2), 0 0 50px rgba(6, 182, 212, 0.08); }
+  0%, 100% { box-shadow: 0 0 15px rgba(56, 189, 248, 0.1), 0 0 40px rgba(56, 189, 248, 0.04); }
+  50% { box-shadow: 0 0 20px rgba(56, 189, 248, 0.18), 0 0 50px rgba(56, 189, 248, 0.07); }
 }
 
 .glow-pulse {
@@ -110,7 +113,7 @@ body {
 /* ── Text outline ── */
 .text-outline {
   -webkit-text-fill-color: transparent;
-  -webkit-text-stroke: 1px rgba(6, 182, 212, 0.3);
+  -webkit-text-stroke: 1px rgba(56, 189, 248, 0.25);
 }
 
 /* ── Float animation ── */
@@ -130,14 +133,14 @@ body {
 
 /* ── Glassmorphism ── */
 .glass {
-  background: rgba(10, 15, 30, 0.5);
+  background: rgba(22, 32, 50, 0.6);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .glass-light {
-  background: rgba(15, 23, 42, 0.35);
+  background: rgba(30, 41, 59, 0.4);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border: 1px solid rgba(255, 255, 255, 0.04);
@@ -153,12 +156,12 @@ body {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #000;
+  background: #0b1120;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(6, 182, 212, 0.3);
+  background: rgba(56, 189, 248, 0.25);
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(6, 182, 212, 0.5);
+  background: rgba(56, 189, 248, 0.45);
 }

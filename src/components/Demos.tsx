@@ -45,7 +45,7 @@ function WaitlistModal({ demo, onClose }: { demo: Demo; onClose: () => void }) {
             <p className="mb-6 text-sm text-surface-400">Te avisamos cuando esté lista.</p>
             <form onSubmit={handleSubmit} className="space-y-3">
               <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="tu@email.com" required
-                className="w-full rounded-xl border border-surface-700 bg-black px-4 py-3 text-white placeholder-surface-500 outline-none focus:border-cyan-500" />
+                className="w-full rounded-xl border border-surface-700 bg-surface-950 px-4 py-3 text-white placeholder-surface-500 outline-none focus:border-cyan-500" />
               <button type="submit" className="w-full rounded-xl bg-cyan-500 py-3 font-semibold text-black hover:bg-cyan-400">Avisarme</button>
             </form>
           </>

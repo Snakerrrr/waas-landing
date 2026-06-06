@@ -42,10 +42,10 @@ function MarqueeItem({ cat }: { cat: Category }) {
 
 export default function Marquee() {
   return (
-    <section className="relative overflow-hidden border-y border-white/[0.03] bg-black/80 py-6 sm:py-8">
+    <section className="relative overflow-hidden border-y border-white/[0.03] bg-surface-950/80 py-6 sm:py-8">
       {/* Fade edges */}
-      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-black to-transparent" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-black to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-surface-950 to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-surface-950 to-transparent" />
 
       {/* Row 1 -- categories with icons, left to right */}
       <div className="animate-marquee mb-4 flex whitespace-nowrap">

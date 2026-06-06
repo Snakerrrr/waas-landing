@@ -9,7 +9,7 @@ export default function GridSpotlight() {
 
     const onMove = (e: MouseEvent) => {
       el.style.setProperty("--mx", `${e.clientX}px`);
-      el.style.setProperty("--my", `${e.clientY + window.scrollY}px`);
+      el.style.setProperty("--my", `${e.clientY}px`);
     };
 
     window.addEventListener("mousemove", onMove, { passive: true });

@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Star } from "lucide-react";
+import SectionTitle from "./SectionTitle";
 
 const testimonials = [
   { name: "María González", role: "Dueña — La Casa del Sabor", avatar: "MG", text: "En menos de una semana tenía mi web funcionando con menú digital y reservas online. Antes pagué $5,000 a una agencia y no se compara. Ahora pago $199/mes y tengo todo incluido.", color: "from-orange-500 to-red-500" },
@@ -17,13 +18,7 @@ export default function Testimonials() {
   return (
     <section className="py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-80px" }} transition={{ duration: 0.7 }} className="mb-16">
-          <p className="mb-3 text-sm font-semibold tracking-[0.2em] text-cyan-400 uppercase">Testimonios</p>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl">
-            <span className="font-light text-surface-300">Lo que dicen</span><br />
-            <span className="font-extrabold text-white">nuestros clientes.</span>
-          </h2>
-        </motion.div>
+        <SectionTitle eyebrow="Testimonios" lightText="Lo que dicen" boldText="nuestros clientes." className="mb-16" />
 
         {/* Featured testimonial -- editorial, no card */}
         <motion.div

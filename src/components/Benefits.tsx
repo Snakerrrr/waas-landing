@@ -4,6 +4,7 @@ import {
   Search, HardDrive, CreditCard, TrendingUp,
   X as XIcon, Check,
 } from "lucide-react";
+import SectionTitle from "./SectionTitle";
 
 const benefits = [
   { icon: CreditCard, title: "Sin Inversión Inicial", description: "Olvídate de pagar $3,000–$10,000 de golpe. Empieza con una cuota mensual accesible.", span: "sm:col-span-2 sm:row-span-2" },
@@ -36,13 +37,7 @@ export default function Benefits() {
   return (
     <section id="beneficios" className="py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-80px" }} transition={{ duration: 0.7 }} className="mb-14">
-          <p className="mb-3 text-sm font-semibold tracking-[0.2em] text-cyan-400 uppercase">Beneficios</p>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl">
-            <span className="font-light text-surface-300">Todo incluido.</span><br />
-            <span className="font-extrabold text-white">Cero sorpresas.</span>
-          </h2>
-        </motion.div>
+        <SectionTitle eyebrow="Beneficios" lightText="Todo incluido." boldText="Cero sorpresas." className="mb-14" />
 
         {/* Bento Grid */}
         <div className="mb-24 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">

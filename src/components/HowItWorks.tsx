@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { MousePointerClick, Paintbrush, Rocket, Wrench } from "lucide-react";
+import SectionTitle from "./SectionTitle";
 
 const steps = [
   { num: "01", icon: MousePointerClick, title: "Elige tu Diseño", description: "Explora nuestras demos y selecciona la plantilla que mejor se adapte a tu negocio.", span: "md:col-span-2" },
@@ -12,20 +13,7 @@ export default function HowItWorks() {
   return (
     <section id="como-funciona" className="relative py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.7 }}
-          className="mb-14"
-        >
-          <p className="mb-3 text-sm font-semibold tracking-[0.2em] text-cyan-400 uppercase">Proceso</p>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl">
-            <span className="font-light text-surface-300">Tu web lista</span>
-            <br />
-            <span className="font-extrabold text-white">en 4 pasos.</span>
-          </h2>
-        </motion.div>
+        <SectionTitle eyebrow="Proceso" lightText="Tu web lista" boldText="en 4 pasos." className="mb-14" />
 
         {/* Bento Grid */}
         <div className="grid gap-4 md:grid-cols-2">

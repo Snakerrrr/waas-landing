@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ExternalLink, Clock, Bell, Eye, X } from "lucide-react";
 import { useTilt } from "../hooks/useTilt";
+import SectionTitle from "./SectionTitle";
 
 type DemoStatus = "live" | "coming_soon";
 
@@ -140,13 +141,7 @@ export default function Demos() {
   return (
     <section id="demos" className="py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-80px" }} transition={{ duration: 0.7 }} className="mb-10">
-          <p className="mb-3 text-sm font-semibold tracking-[0.2em] text-cyan-400 uppercase">Portafolio</p>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl">
-            <span className="font-light text-surface-300">Demos listas para</span><br />
-            <span className="font-extrabold text-white">tu negocio.</span>
-          </h2>
-        </motion.div>
+        <SectionTitle eyebrow="Portafolio" lightText="Demos listas para" boldText="tu negocio." className="mb-10" />
 
         {/* Editorial filters */}
         <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2 }} className="mb-10 flex flex-wrap items-center gap-x-1 gap-y-2 text-sm">

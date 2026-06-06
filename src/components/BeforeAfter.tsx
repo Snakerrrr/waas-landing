@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import SectionTitle from "./SectionTitle";
 
 function BadMockup() {
   return (
@@ -38,14 +39,9 @@ export default function BeforeAfter() {
   return (
     <section className="py-24 sm:py-32">
       <div className="mx-auto max-w-5xl px-6 lg:px-8">
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-80px" }} transition={{ duration: 0.7 }} className="mb-16">
-          <p className="mb-3 text-sm font-semibold tracking-[0.2em] text-cyan-400 uppercase">Transformación</p>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl">
-            <span className="font-light text-surface-300">De esto...</span>{" "}
-            <span className="font-extrabold text-white">a <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">esto.</span></span>
-          </h2>
-          <p className="mt-3 text-base text-surface-400">En 48 horas. Sin dolores de cabeza.</p>
-        </motion.div>
+        <SectionTitle eyebrow="Transformación" lightText="De esto..." boldText="a esto." className="mb-4" />
+        <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.5 }}
+          className="mb-16 text-base text-surface-400">En 48 horas. Sin dolores de cabeza.</motion.p>
 
         {/* Overlapping mockups */}
         <div className="relative mx-auto max-w-2xl">

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Check, ArrowRight, Sparkles } from "lucide-react";
+import SectionTitle from "./SectionTitle";
 
 interface Plan { name: string; monthly: number; annual: number; description: string; features: string[]; cta: string; popular: boolean; stripeMonthly: string; stripeAnnual: string; }
 
@@ -18,14 +19,9 @@ export default function Pricing() {
   return (
     <section id="precios" className="py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-80px" }} transition={{ duration: 0.7 }} className="mb-12">
-          <p className="mb-3 text-sm font-semibold tracking-[0.2em] text-cyan-400 uppercase">Precios</p>
-          <h2 className="mb-4 text-3xl sm:text-4xl lg:text-5xl">
-            <span className="font-light text-surface-300">Un plan para cada</span><br />
-            <span className="font-extrabold text-white">etapa de tu negocio.</span>
-          </h2>
-          <p className="max-w-md text-base text-surface-400">Sin contratos. Sin costos ocultos. Cancela cuando quieras.</p>
-        </motion.div>
+        <SectionTitle eyebrow="Precios" lightText="Un plan para cada" boldText="etapa de tu negocio." className="mb-4" />
+        <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.5 }}
+          className="mb-12 max-w-md text-base text-surface-400">Sin contratos. Sin costos ocultos. Cancela cuando quieras.</motion.p>
 
         {/* Toggle */}
         <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2 }} className="mb-12 flex items-center gap-4">

@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { Menu, X, Sun, Moon, Zap } from "lucide-react";
-import { useTheme } from "../context/ThemeContext";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Zap } from "lucide-react";
 
 const navLinks = [
   { label: "Cómo Funciona", href: "#como-funciona" },
@@ -15,83 +15,136 @@ interface NavbarProps {
 }
 
 export default function Navbar({ onStartOnboarding }: NavbarProps) {
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const { theme, toggleTheme } = useTheme();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [menuOpen]);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-surface-200 bg-white/80 backdrop-blur-xl dark:border-surface-800 dark:bg-surface-950/80">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-        {/* Logo */}
-        <a href="#" className="flex items-center gap-2">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-primary-500 to-primary-700">
-            <Zap className="h-5 w-5 text-white" />
-          </div>
-          <span className="text-xl font-bold text-surface-900 dark:text-white">
-            WebFlow<span className="text-primary-500">Studio</span>
-          </span>
-        </a>
+    <>
+      {/* Scroll Progress Bar */}
+      <motion.div
+        className="scroll-progress fixed top-0 left-0 right-0 z-[60] h-[2px] bg-gradient-to-r from-cyan-400 to-blue-500"
+        style={{ scaleX: 0 }}
+        animate={{ scaleX: scrolled ? undefined : 0 }}
+        transition={{ duration: 0 }}
+        ref={(el) => {
+          if (!el) return;
+          const update = () => {
+            const max = document.documentElement.scrollHeight - window.innerHeight;
+            el.style.transform = `scaleX(${max > 0 ? window.scrollY / max : 0})`;
+          };
+          window.addEventListener("scroll", update, { passive: true });
+          update();
+        }}
+      />
 
-        {/* Desktop Nav */}
-        <div className="hidden items-center gap-8 md:flex">
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="text-sm font-medium text-surface-600 transition-colors hover:text-primary-500 dark:text-surface-400 dark:hover:text-primary-400"
+      <nav
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+          scrolled ? "bg-black/70 backdrop-blur-xl" : "bg-transparent"
+        }`}
+      >
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-8">
+          {/* Logo */}
+          <a href="#" className="relative z-50 flex items-center gap-2.5">
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-cyan-400 to-blue-500">
+              <Zap className="h-5 w-5 text-black" />
+            </div>
+            <span className="text-xl font-bold text-white">
+              WebFlow<span className="text-cyan-400">Studio</span>
+            </span>
+          </a>
+
+          {/* Desktop Nav */}
+          <div className="hidden items-center gap-8 lg:flex">
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="text-sm font-medium text-surface-400 transition-colors hover:text-cyan-400"
+              >
+                {link.label}
+              </a>
+            ))}
+            <button
+              onClick={onStartOnboarding}
+              className="rounded-lg border border-cyan-500/30 bg-cyan-500/10 px-5 py-2 text-sm font-semibold text-cyan-400 transition-all hover:bg-cyan-500/20 hover:shadow-lg hover:shadow-cyan-500/10"
             >
-              {link.label}
-            </a>
-          ))}
-        </div>
+              Empezar
+            </button>
+          </div>
 
-        {/* Actions */}
-        <div className="flex items-center gap-3">
+          {/* Hamburger */}
           <button
-            onClick={toggleTheme}
-            className="rounded-lg p-2 text-surface-500 transition-colors hover:bg-surface-100 dark:text-surface-400 dark:hover:bg-surface-800"
-            aria-label="Cambiar tema"
-          >
-            {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-          </button>
-
-          <button
-            onClick={onStartOnboarding}
-            className="hidden rounded-lg bg-primary-600 px-4 py-2 text-sm font-semibold text-white transition-all hover:bg-primary-700 hover:shadow-lg hover:shadow-primary-500/25 sm:inline-flex"
-          >
-            Empieza Hoy
-          </button>
-
-          <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="rounded-lg p-2 text-surface-500 md:hidden dark:text-surface-400"
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="relative z-50 flex h-10 w-10 flex-col items-center justify-center gap-1.5 lg:hidden"
             aria-label="Menú"
           >
-            {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            <motion.span
+              className="block h-[2px] w-6 bg-white"
+              animate={menuOpen ? { rotate: 45, y: 5 } : { rotate: 0, y: 0 }}
+              transition={{ duration: 0.3 }}
+            />
+            <motion.span
+              className="block h-[2px] w-6 bg-white"
+              animate={menuOpen ? { opacity: 0 } : { opacity: 1 }}
+              transition={{ duration: 0.2 }}
+            />
+            <motion.span
+              className="block h-[2px] w-6 bg-white"
+              animate={menuOpen ? { rotate: -45, y: -5 } : { rotate: 0, y: 0 }}
+              transition={{ duration: 0.3 }}
+            />
           </button>
         </div>
-      </div>
+      </nav>
 
-      {/* Mobile Menu */}
-      {mobileOpen && (
-        <div className="border-t border-surface-200 bg-white px-4 pb-6 pt-2 md:hidden dark:border-surface-800 dark:bg-surface-950">
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              onClick={() => setMobileOpen(false)}
-              className="block py-3 text-base font-medium text-surface-700 dark:text-surface-300"
-            >
-              {link.label}
-            </a>
-          ))}
-          <button
-            onClick={() => { setMobileOpen(false); onStartOnboarding(); }}
-            className="mt-3 block w-full rounded-lg bg-primary-600 px-4 py-3 text-center text-sm font-semibold text-white"
+      {/* Fullscreen Menu Overlay */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4 }}
+            className="fixed inset-0 z-40 flex flex-col items-center justify-center bg-black/95 backdrop-blur-2xl"
           >
-            Empieza Hoy
-          </button>
-        </div>
-      )}
-    </nav>
+            <nav className="flex flex-col items-center gap-8">
+              {navLinks.map((link, i) => (
+                <motion.a
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMenuOpen(false)}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.08, duration: 0.4 }}
+                  className="text-3xl font-bold text-white transition-colors hover:text-cyan-400 sm:text-4xl"
+                >
+                  {link.label}
+                </motion.a>
+              ))}
+              <motion.button
+                onClick={() => { setMenuOpen(false); onStartOnboarding(); }}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: navLinks.length * 0.08, duration: 0.4 }}
+                className="mt-4 rounded-xl border border-cyan-500/30 bg-cyan-500/10 px-8 py-4 text-lg font-semibold text-cyan-400 transition-all hover:bg-cyan-500/20"
+              >
+                Empezar Ahora
+              </motion.button>
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }

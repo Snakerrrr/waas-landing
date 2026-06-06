@@ -1,6 +1,6 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { Check, ArrowRight, Sparkles } from "lucide-react";
-import { useScrollReveal } from "../hooks/useScrollReveal";
 
 interface Plan {
   name: string;
@@ -14,10 +14,6 @@ interface Plan {
   stripeAnnual: string;
 }
 
-// ──────────────────────────────────────────────────────────────
-// Reemplaza estos URLs con tus Stripe Payment Links reales.
-// Créalos en: https://dashboard.stripe.com/payment-links
-// ──────────────────────────────────────────────────────────────
 const STRIPE_LINKS = {
   starter_monthly: "#configure-stripe-starter-monthly",
   starter_annual: "#configure-stripe-starter-annual",
@@ -28,166 +24,106 @@ const STRIPE_LINKS = {
 };
 
 const plans: Plan[] = [
-  {
-    name: "Starter",
-    monthly: 99,
-    annual: 79,
-    description: "Ideal para negocios que inician su presencia digital.",
-    features: [
-      "Diseño de 1–5 páginas",
-      "Hosting premium incluido",
-      "Certificado SSL",
-      "Dominio personalizado",
-      "Diseño 100% responsive",
-      "3 cambios mensuales",
-      "Soporte por email",
-      "Backups semanales",
-    ],
-    cta: "Empezar con Starter",
-    popular: false,
-    stripeMonthly: STRIPE_LINKS.starter_monthly,
-    stripeAnnual: STRIPE_LINKS.starter_annual,
-  },
-  {
-    name: "Pro",
-    monthly: 199,
-    annual: 159,
-    description: "Para negocios en crecimiento que necesitan más poder.",
-    features: [
-      "Diseño de hasta 10 páginas",
-      "Todo lo de Starter, más:",
-      "Cambios ilimitados",
-      "Blog integrado",
-      "Formularios avanzados",
-      "SEO técnico completo",
-      "Soporte prioritario (< 2h)",
-      "Backups diarios",
-      "Analytics integrado",
-      "Integraciones (WhatsApp, CRM)",
-    ],
-    cta: "Empezar con Pro",
-    popular: true,
-    stripeMonthly: STRIPE_LINKS.pro_monthly,
-    stripeAnnual: STRIPE_LINKS.pro_annual,
-  },
-  {
-    name: "Scale",
-    monthly: 349,
-    annual: 279,
-    description: "Para empresas que necesitan escalar sin límites.",
-    features: [
-      "Páginas ilimitadas",
-      "Todo lo de Pro, más:",
-      "E-commerce integrado",
-      "Pasarela de pagos",
-      "Sistema de reservas / citas",
-      "Multi-idioma",
-      "Soporte dedicado (< 1h)",
-      "Backups en tiempo real",
-      "CDN premium global",
-      "Consultoría mensual CRO",
-      "A/B Testing",
-    ],
-    cta: "Empezar con Scale",
-    popular: false,
-    stripeMonthly: STRIPE_LINKS.scale_monthly,
-    stripeAnnual: STRIPE_LINKS.scale_annual,
-  },
+  { name: "Starter", monthly: 99, annual: 79, description: "Ideal para negocios que inician.", features: ["1–5 páginas", "Hosting premium", "SSL incluido", "Dominio personalizado", "100% responsive", "3 cambios/mes", "Soporte email", "Backups semanales"], cta: "Empezar", popular: false, stripeMonthly: STRIPE_LINKS.starter_monthly, stripeAnnual: STRIPE_LINKS.starter_annual },
+  { name: "Pro", monthly: 199, annual: 159, description: "Para negocios en crecimiento.", features: ["Hasta 10 páginas", "Todo de Starter +", "Cambios ilimitados", "Blog integrado", "Formularios avanzados", "SEO completo", "Soporte prioritario", "Backups diarios", "Analytics", "WhatsApp + CRM"], cta: "Empezar", popular: true, stripeMonthly: STRIPE_LINKS.pro_monthly, stripeAnnual: STRIPE_LINKS.pro_annual },
+  { name: "Scale", monthly: 349, annual: 279, description: "Para empresas que escalan.", features: ["Páginas ilimitadas", "Todo de Pro +", "E-commerce", "Pasarela de pagos", "Reservas / citas", "Multi-idioma", "Soporte dedicado", "Backups en tiempo real", "CDN premium", "Consultoría CRO", "A/B Testing"], cta: "Empezar", popular: false, stripeMonthly: STRIPE_LINKS.scale_monthly, stripeAnnual: STRIPE_LINKS.scale_annual },
 ];
 
 export default function Pricing() {
   const [annual, setAnnual] = useState(false);
-  const { ref, isVisible } = useScrollReveal<HTMLElement>();
 
   return (
-    <section id="precios" ref={ref} className="bg-surface-50 py-20 sm:py-28 dark:bg-surface-900/50">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className={`mx-auto mb-12 max-w-2xl text-center transition-all duration-700 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"}`}>
-          <p className="mb-3 text-sm font-semibold tracking-wider text-primary-500 uppercase">
-            Precios Transparentes
-          </p>
-          <h2 className="mb-4 text-3xl font-bold text-surface-900 sm:text-4xl lg:text-5xl dark:text-white">
-            Un plan para cada{" "}
-            <span className="text-primary-500">etapa de tu negocio</span>
+    <section id="precios" className="py-32 sm:py-40">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8 }}
+          className="mb-16"
+        >
+          <p className="mb-4 text-sm font-semibold tracking-[0.2em] text-cyan-400 uppercase">Precios</p>
+          <h2 className="mb-6 text-4xl font-black text-white sm:text-5xl lg:text-7xl">
+            Un plan para cada<br />
+            <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+              etapa de tu negocio.
+            </span>
           </h2>
-          <p className="text-lg text-surface-600 dark:text-surface-400">
-            Sin contratos a largo plazo. Sin costos ocultos. Cancela cuando quieras.
+          <p className="max-w-xl text-lg text-surface-400">
+            Sin contratos. Sin costos ocultos. Cancela cuando quieras.
           </p>
-        </div>
+        </motion.div>
 
-        {/* Billing Toggle */}
-        <div className={`mb-12 flex items-center justify-center gap-4 transition-all duration-700 delay-100 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"}`}>
-          <span className={`text-sm font-medium ${!annual ? "text-surface-900 dark:text-white" : "text-surface-500 dark:text-surface-400"}`}>
-            Mensual
-          </span>
+        {/* Toggle */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="mb-16 flex items-center gap-4"
+        >
+          <span className={`text-sm font-medium ${!annual ? "text-white" : "text-surface-500"}`}>Mensual</span>
           <button
             onClick={() => setAnnual(!annual)}
-            className={`relative h-7 w-12 rounded-full transition-colors ${annual ? "bg-primary-600" : "bg-surface-300 dark:bg-surface-700"}`}
-            aria-label="Cambiar entre mensual y anual"
+            className={`relative h-7 w-12 rounded-full transition-colors ${annual ? "bg-cyan-500" : "bg-surface-700"}`}
           >
-            <span className={`absolute top-0.5 left-0.5 h-6 w-6 rounded-full bg-white shadow transition-transform ${annual ? "translate-x-5" : "translate-x-0"}`} />
+            <span className={`absolute top-0.5 left-0.5 h-6 w-6 rounded-full bg-black transition-transform ${annual ? "translate-x-5" : ""}`} />
           </button>
-          <span className={`text-sm font-medium ${annual ? "text-surface-900 dark:text-white" : "text-surface-500 dark:text-surface-400"}`}>
-            Anual
-          </span>
+          <span className={`text-sm font-medium ${annual ? "text-white" : "text-surface-500"}`}>Anual</span>
           {annual && (
-            <span className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-bold text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-400">
-              Ahorra 20%
+            <span className="rounded-full bg-cyan-500/10 px-3 py-1 text-xs font-bold text-cyan-400 ring-1 ring-cyan-500/20">
+              -20%
             </span>
           )}
-        </div>
+        </motion.div>
 
-        {/* Pricing Cards */}
-        <div className="grid items-start gap-8 lg:grid-cols-3">
+        {/* Cards */}
+        <div className="grid items-start gap-6 lg:grid-cols-3">
           {plans.map((plan, i) => {
             const price = annual ? plan.annual : plan.monthly;
             const link = annual ? plan.stripeAnnual : plan.stripeMonthly;
 
             return (
-              <div
+              <motion.div
                 key={plan.name}
-                className={`relative rounded-2xl border p-8 transition-all duration-700 ${
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.12 }}
+                className={`relative rounded-2xl border p-8 transition-all duration-500 ${
                   plan.popular
-                    ? "scale-105 border-primary-500 bg-white shadow-2xl shadow-primary-500/10 dark:bg-surface-900"
-                    : "border-surface-200 bg-white hover:shadow-lg dark:border-surface-800 dark:bg-surface-900"
-                } ${isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"}`}
-                style={{ transitionDelay: `${(i + 1) * 150}ms` }}
+                    ? "border-cyan-500/40 bg-surface-950 shadow-xl shadow-cyan-500/5 glow-pulse lg:scale-105"
+                    : "border-surface-800 bg-surface-950 hover:border-surface-700"
+                }`}
               >
                 {plan.popular && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                    <span className="inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-primary-500 to-purple-500 px-4 py-1.5 text-sm font-semibold text-white shadow-lg">
-                      <Sparkles className="h-4 w-4" />
-                      Más Popular
+                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
+                    <span className="inline-flex items-center gap-1 rounded-full bg-cyan-500 px-4 py-1 text-xs font-bold text-black">
+                      <Sparkles className="h-3 w-3" /> Más Popular
                     </span>
                   </div>
                 )}
 
-                <div className="mb-6">
-                  <h3 className="mb-1 text-lg font-bold text-surface-900 dark:text-white">{plan.name}</h3>
-                  <p className="text-sm text-surface-500 dark:text-surface-400">{plan.description}</p>
-                </div>
+                <h3 className="mb-1 text-lg font-bold text-white">{plan.name}</h3>
+                <p className="mb-6 text-sm text-surface-500">{plan.description}</p>
 
                 <div className="mb-1 flex items-baseline gap-1">
-                  <span className="text-5xl font-extrabold text-surface-900 dark:text-white">${price}</span>
-                  <span className="text-lg text-surface-500 dark:text-surface-400">/mes</span>
+                  <span className="text-5xl font-black text-white">${price}</span>
+                  <span className="text-surface-500">/mes</span>
                 </div>
                 {annual && (
-                  <p className="mb-5 text-sm text-surface-400 dark:text-surface-500">
-                    <span className="line-through">${plan.monthly}/mes</span>
-                    {" · "}Facturado anualmente (${price * 12}/año)
+                  <p className="mb-6 text-xs text-surface-600">
+                    <span className="line-through">${plan.monthly}</span> · Facturado anual
                   </p>
                 )}
                 {!annual && <div className="mb-6" />}
 
                 <a
-                  href={link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`group mb-8 flex items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-sm font-semibold transition-all ${
+                  href={link} target="_blank" rel="noopener noreferrer"
+                  className={`group mb-8 flex items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-sm font-bold transition-all ${
                     plan.popular
-                      ? "bg-primary-600 text-white shadow-lg shadow-primary-500/25 hover:bg-primary-700"
-                      : "bg-surface-900 text-white hover:bg-surface-800 dark:bg-white dark:text-surface-900 dark:hover:bg-surface-200"
+                      ? "bg-cyan-500 text-black hover:bg-cyan-400 hover:shadow-lg hover:shadow-cyan-500/20"
+                      : "border border-surface-700 text-white hover:border-surface-500 hover:bg-surface-900"
                   }`}
                 >
                   {plan.cta}
@@ -195,20 +131,20 @@ export default function Pricing() {
                 </a>
 
                 <ul className="space-y-3">
-                  {plan.features.map((feature) => (
-                    <li key={feature} className="flex items-start gap-3">
-                      <Check className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500" />
-                      <span className="text-sm text-surface-700 dark:text-surface-300">{feature}</span>
+                  {plan.features.map((f) => (
+                    <li key={f} className="flex items-start gap-3">
+                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-cyan-400" />
+                      <span className="text-sm text-surface-300">{f}</span>
                     </li>
                   ))}
                 </ul>
-              </div>
+              </motion.div>
             );
           })}
         </div>
 
-        <p className="mt-12 text-center text-sm text-surface-500 dark:text-surface-400">
-          Todos los planes incluyen 14 días de garantía de satisfacción. Si no estás contento, te devolvemos tu dinero.
+        <p className="mt-12 text-center text-sm text-surface-600">
+          14 días de garantía. Si no estás contento, te devolvemos tu dinero.
         </p>
       </div>
     </section>

@@ -63,7 +63,7 @@ export default function Hero({ onStartOnboarding }: HeroProps) {
 
   return (
     <>
-      <section className="mesh-gradient relative overflow-hidden pt-28 pb-20 sm:pt-36 sm:pb-28 lg:pb-32">
+      <section className="relative overflow-hidden pt-28 pb-20 sm:pt-36 sm:pb-28 lg:pb-32">
         <div className="pointer-events-none absolute inset-0">
           <div className="absolute top-20 left-[10%] h-[300px] w-[300px] rounded-full bg-cyan-500/5 blur-[100px]" />
           <div className="absolute right-[5%] bottom-1/4 h-[250px] w-[250px] rounded-full bg-blue-500/4 blur-[80px]" />

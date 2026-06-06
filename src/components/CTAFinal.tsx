@@ -8,7 +8,7 @@ interface CTAFinalProps {
 
 export default function CTAFinal({ onStartOnboarding }: CTAFinalProps) {
   return (
-    <section className="mesh-gradient relative overflow-hidden py-24 sm:py-32">
+    <section className="relative overflow-hidden py-24 sm:py-32">
       {/* Decorative floating circle */}
       <div className="pointer-events-none absolute -right-20 top-1/2 h-[400px] w-[400px] -translate-y-1/2 rounded-full bg-gradient-to-br from-cyan-500/10 to-blue-500/5 blur-[80px] animate-float-slow" />
 

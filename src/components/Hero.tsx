@@ -16,7 +16,7 @@ const mockups = [
 
 function Mockup({ m, className = "" }: { m: (typeof mockups)[0]; className?: string }) {
   return (
-    <div className={`rounded-2xl border ${m.accent} bg-surface-950 shadow-2xl shadow-black/60 ${className}`}>
+    <div className={`glass rounded-2xl shadow-2xl shadow-black/60 ${className}`}>
       <div className="flex items-center gap-1.5 border-b border-white/5 px-3 py-2">
         <div className="h-2 w-2 rounded-full bg-red-400/50" />
         <div className="h-2 w-2 rounded-full bg-amber-400/50" />

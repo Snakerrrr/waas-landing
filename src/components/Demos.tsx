@@ -35,7 +35,7 @@ function WaitlistModal({ demo, onClose }: { demo: Demo; onClose: () => void }) {
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-md" onClick={onClose}>
       <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }}
-        className="relative w-full max-w-md rounded-2xl border border-surface-800 bg-surface-950 p-8" onClick={(e) => e.stopPropagation()}>
+        className="relative w-full max-w-md glass rounded-2xl p-8" onClick={(e) => e.stopPropagation()}>
         <button onClick={onClose} className="absolute top-4 right-4 text-surface-500 hover:text-white"><X className="h-5 w-5" /></button>
         {!submitted ? (
           <>
@@ -77,7 +77,7 @@ function DemoCard({ demo, index, onWaitlist }: { demo: Demo; index: number; onWa
         ref={tilt.ref}
         onMouseMove={tilt.onMouseMove}
         onMouseLeave={tilt.onMouseLeave}
-        className="group h-full overflow-hidden rounded-2xl border border-surface-800 bg-surface-950 transition-all duration-300 hover:-translate-y-1 hover:border-cyan-500/20 hover:shadow-xl hover:shadow-cyan-500/5"
+        className="group h-full overflow-hidden glass rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:border-white/10 hover:shadow-xl hover:shadow-cyan-500/5"
         style={{ transformStyle: "preserve-3d", transition: "transform 0.15s ease-out" }}
       >
         <div className={`relative bg-gradient-to-br ${demo.gradient} ${isFirst ? "h-56 sm:h-72" : "h-44"} p-5`}>

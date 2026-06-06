@@ -50,7 +50,7 @@ export default function Navbar({ onStartOnboarding }: NavbarProps) {
 
       <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled ? "bg-black/70 backdrop-blur-xl" : "bg-transparent"
+          scrolled ? "glass" : "bg-transparent"
         }`}
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-8">

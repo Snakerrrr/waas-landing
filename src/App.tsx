@@ -1,5 +1,6 @@
 import { useState } from "react";
 import SmoothScroll from "./components/SmoothScroll";
+import BackgroundBlobs from "./components/BackgroundBlobs";
 import Navbar from "./components/Navbar";
 import UrgencyBanner from "./components/UrgencyBanner";
 import Hero from "./components/Hero";
@@ -22,25 +23,27 @@ export default function App() {
 
   return (
     <SmoothScroll>
-      <div className="min-h-screen bg-black text-surface-200">
-        <Navbar onStartOnboarding={openOnboarding} />
-        <UrgencyBanner onStartOnboarding={openOnboarding} />
-        <main>
-          <Hero onStartOnboarding={openOnboarding} />
-          <Marquee />
-          <HowItWorks />
-          <Demos />
-          <Benefits />
-          <BeforeAfter />
-          <Testimonials />
-          <Pricing />
-          <FAQ />
-          <CTAFinal onStartOnboarding={openOnboarding} />
-        </main>
-        <Footer />
-        <WhatsAppButton />
-
-        {showOnboarding && <OnboardingForm onClose={() => setShowOnboarding(false)} />}
+      <div className="relative min-h-screen bg-black text-surface-200">
+        <BackgroundBlobs />
+        <div className="relative z-10">
+          <Navbar onStartOnboarding={openOnboarding} />
+          <UrgencyBanner onStartOnboarding={openOnboarding} />
+          <main>
+            <Hero onStartOnboarding={openOnboarding} />
+            <Marquee />
+            <HowItWorks />
+            <Demos />
+            <Benefits />
+            <BeforeAfter />
+            <Testimonials />
+            <Pricing />
+            <FAQ />
+            <CTAFinal onStartOnboarding={openOnboarding} />
+          </main>
+          <Footer />
+          <WhatsAppButton />
+          {showOnboarding && <OnboardingForm onClose={() => setShowOnboarding(false)} />}
+        </div>
       </div>
     </SmoothScroll>
   );

@@ -55,7 +55,7 @@ export default function Benefits() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.06 }}
-                className={`group rounded-2xl border border-surface-800 bg-surface-950 transition-all duration-300 hover:border-cyan-500/20 ${b.span} ${isLarge ? "p-8" : "p-6"}`}
+                className={`group glass rounded-2xl transition-all duration-300 hover:border-white/10 ${b.span} ${isLarge ? "p-8" : "p-6"}`}
               >
                 <div className={`mb-4 flex items-center justify-center rounded-xl border border-cyan-500/20 bg-cyan-500/5 ${isLarge ? "h-14 w-14" : "h-11 w-11"}`}>
                   <b.icon className={`text-cyan-400 ${isLarge ? "h-7 w-7" : "h-5 w-5"}`} />
@@ -74,8 +74,8 @@ export default function Benefits() {
             <span className="font-bold text-cyan-400">Modelo WaaS</span>
           </h3>
 
-          <div className="max-w-3xl overflow-hidden rounded-2xl border border-surface-800">
-            <div className="grid grid-cols-3 border-b border-surface-800 bg-surface-950 px-6 py-4">
+          <div className="max-w-3xl overflow-hidden glass rounded-2xl">
+            <div className="grid grid-cols-3 border-b border-white/5 px-6 py-4">
               <span className="text-sm font-semibold text-surface-400">Característica</span>
               <span className="text-center text-sm font-semibold text-surface-500">Tradicional</span>
               <span className="text-center text-sm font-semibold text-cyan-400">WaaS</span>

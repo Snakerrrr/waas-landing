@@ -21,7 +21,7 @@ function BadMockup() {
 
 function GoodMockup() {
   return (
-    <div className="rounded-xl border border-cyan-500/20 bg-surface-950 p-1 glow-cyan">
+    <div className="glass rounded-xl glow-cyan p-1">
       <div className="flex items-center gap-1.5 border-b border-cyan-500/10 px-3 py-2">
         <div className="h-2 w-2 rounded-full bg-cyan-400/60" /><div className="h-2 w-2 rounded-full bg-cyan-400/40" /><div className="h-2 w-2 rounded-full bg-cyan-400/40" />
       </div>

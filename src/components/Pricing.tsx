@@ -52,8 +52,8 @@ export default function Pricing() {
                 transition={{ duration: 0.5, delay: i * 0.1 }}
                 className={`relative rounded-2xl border p-8 transition-all duration-300 ${
                   plan.popular
-                    ? "z-10 border-cyan-500/30 bg-surface-950 shadow-xl shadow-cyan-500/5 glow-pulse lg:-translate-y-4 lg:scale-[1.03]"
-                    : "border-surface-800 bg-surface-950 opacity-[0.97] hover:border-surface-700"
+                    ? "z-10 glass border-cyan-500/20 shadow-xl shadow-cyan-500/5 glow-pulse lg:-translate-y-4 lg:scale-[1.03]"
+                    : "glass opacity-[0.97] hover:border-white/10"
                 }`}
               >
                 {plan.popular && (

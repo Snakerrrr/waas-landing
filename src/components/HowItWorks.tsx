@@ -36,7 +36,7 @@ export default function HowItWorks() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className={`group relative overflow-hidden rounded-2xl border border-surface-800 bg-surface-950 p-8 transition-all duration-300 hover:border-cyan-500/20 ${s.span}`}
+              className={`group relative overflow-hidden glass rounded-2xl p-8 transition-all duration-300 hover:border-white/10 ${s.span}`}
             >
               {/* Decorative number -- overlapping top-right */}
               <span className="pointer-events-none absolute -top-4 -right-2 text-[7rem] font-extrabold leading-none text-surface-900/40 select-none transition-colors group-hover:text-cyan-500/5">
@@ -44,7 +44,7 @@ export default function HowItWorks() {
               </span>
 
               <div className="relative z-10">
-                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl border border-surface-700 bg-surface-900">
+                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl glass-light">
                   <s.icon className="h-6 w-6 text-cyan-400" />
                 </div>
                 <h3 className="mb-2 text-xl font-semibold text-white">{s.title}</h3>

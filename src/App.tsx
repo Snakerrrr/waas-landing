@@ -1,6 +1,5 @@
 import { useState } from "react";
 import SmoothScroll from "./components/SmoothScroll";
-import CustomCursor from "./components/CustomCursor";
 import Navbar from "./components/Navbar";
 import UrgencyBanner from "./components/UrgencyBanner";
 import Hero from "./components/Hero";
@@ -24,7 +23,6 @@ export default function App() {
   return (
     <SmoothScroll>
       <div className="min-h-screen bg-black text-surface-200">
-        <CustomCursor />
         <Navbar onStartOnboarding={openOnboarding} />
         <UrgencyBanner onStartOnboarding={openOnboarding} />
         <main>

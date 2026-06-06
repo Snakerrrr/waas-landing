@@ -23,7 +23,7 @@ export default function App() {
 
   return (
     <SmoothScroll>
-      <div className="relative min-h-screen bg-black text-surface-200">
+      <div className="noise grid-pattern relative min-h-screen bg-black text-surface-200">
         <BackgroundBlobs />
         <div className="relative z-10">
           <Navbar onStartOnboarding={openOnboarding} />

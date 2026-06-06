@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowDown, Play, ChevronLeft, ChevronRight } from "lucide-react";
+import { Play } from "lucide-react";
 import VideoModal from "./VideoModal";
 
 interface HeroProps {
@@ -8,91 +8,40 @@ interface HeroProps {
 }
 
 const mockups = [
-  {
-    name: "Bella Cucina",
-    category: "Restaurante",
-    accent: "border-orange-500/20",
-    accentBg: "bg-orange-500/10",
-    accentText: "text-orange-400",
-    nav: ["Menú", "Reservas", "Galería", "Contacto"],
-    cards: ["Pasta Fresca", "Risotto Clásico", "Tiramisú"],
-  },
-  {
-    name: "ShopNova",
-    category: "E-Commerce",
-    accent: "border-blue-500/20",
-    accentBg: "bg-blue-500/10",
-    accentText: "text-blue-400",
-    nav: ["Productos", "Ofertas", "Carrito", "Mi Cuenta"],
-    cards: ["Electrónica", "Moda", "Hogar"],
-  },
-  {
-    name: "LegalPro",
-    category: "Servicios Legales",
-    accent: "border-surface-500/20",
-    accentBg: "bg-surface-500/10",
-    accentText: "text-surface-400",
-    nav: ["Servicios", "Equipo", "Blog", "Agendar"],
-    cards: ["Corporativo", "Civil", "Laboral"],
-  },
-  {
-    name: "VitalCare",
-    category: "Clínica Médica",
-    accent: "border-emerald-500/20",
-    accentBg: "bg-emerald-500/10",
-    accentText: "text-emerald-400",
-    nav: ["Especialidades", "Doctores", "Citas", "Portal"],
-    cards: ["Medicina General", "Pediatría", "Cardiología"],
-  },
+  { name: "Bella Cucina", cat: "Restaurante", accent: "border-orange-500/20", accentBg: "bg-orange-500/10", nav: ["Menú", "Reservas", "Galería"], cards: ["Pasta Fresca", "Risotto", "Tiramisú"] },
+  { name: "ShopNova", cat: "E-Commerce", accent: "border-blue-500/20", accentBg: "bg-blue-500/10", nav: ["Productos", "Ofertas", "Carrito"], cards: ["Electrónica", "Moda", "Hogar"] },
+  { name: "LegalPro", cat: "Servicios", accent: "border-surface-500/20", accentBg: "bg-surface-500/10", nav: ["Servicios", "Equipo", "Blog"], cards: ["Corporativo", "Civil", "Laboral"] },
+  { name: "VitalCare", cat: "Salud", accent: "border-emerald-500/20", accentBg: "bg-emerald-500/10", nav: ["Especialidades", "Doctores", "Citas"], cards: ["General", "Pediatría", "Cardio"] },
 ];
 
-function MockupSlide({ mockup }: { mockup: (typeof mockups)[0] }) {
+function Mockup({ m, className = "" }: { m: (typeof mockups)[0]; className?: string }) {
   return (
-    <div className={`rounded-2xl border ${mockup.accent} bg-surface-950 shadow-2xl shadow-black/50`}>
-      {/* Browser chrome */}
-      <div className="flex items-center gap-2 border-b border-white/5 px-4 py-3">
-        <div className="flex gap-1.5">
-          <div className="h-2.5 w-2.5 rounded-full bg-red-400/60" />
-          <div className="h-2.5 w-2.5 rounded-full bg-amber-400/60" />
-          <div className="h-2.5 w-2.5 rounded-full bg-emerald-400/60" />
-        </div>
-        <div className="ml-2 flex h-6 flex-1 items-center rounded-md bg-surface-800/80 px-3">
-          <span className="text-[11px] text-surface-400">
-            {mockup.name.toLowerCase().replace(/\s/g, "")}.com
-          </span>
+    <div className={`rounded-2xl border ${m.accent} bg-surface-950 shadow-2xl shadow-black/60 ${className}`}>
+      <div className="flex items-center gap-1.5 border-b border-white/5 px-3 py-2">
+        <div className="h-2 w-2 rounded-full bg-red-400/50" />
+        <div className="h-2 w-2 rounded-full bg-amber-400/50" />
+        <div className="h-2 w-2 rounded-full bg-emerald-400/50" />
+        <div className="ml-2 h-5 flex-1 rounded bg-surface-800/60 px-2 text-[10px] leading-5 text-surface-500">
+          {m.name.toLowerCase().replace(/\s/g, "")}.com
         </div>
       </div>
-
-      {/* Page content */}
-      <div className="p-5 sm:p-6">
-        {/* Nav */}
-        <div className="mb-5 flex items-center justify-between">
-          <div className={`rounded px-2 py-0.5 text-xs font-bold ${mockup.accentText}`}>
-            {mockup.name}
-          </div>
-          <div className="hidden gap-4 sm:flex">
-            {mockup.nav.map((item) => (
-              <span key={item} className="text-[11px] text-surface-500">{item}</span>
-            ))}
-          </div>
+      <div className="p-4">
+        <div className="mb-3 flex items-center justify-between">
+          <div className="text-[10px] font-bold text-surface-300">{m.name}</div>
+          <div className="hidden gap-3 sm:flex">{m.nav.map((n) => <span key={n} className="text-[9px] text-surface-600">{n}</span>)}</div>
         </div>
-
-        {/* Hero area */}
-        <div className={`mb-5 rounded-xl ${mockup.accentBg} p-5`}>
-          <div className="mb-2 h-4 w-3/4 rounded bg-white/15" />
-          <div className="mb-1.5 h-2.5 w-full rounded bg-white/8" />
-          <div className="mb-4 h-2.5 w-2/3 rounded bg-white/5" />
-          <div className="h-7 w-24 rounded-lg bg-cyan-500/40" />
+        <div className={`mb-3 rounded-lg ${m.accentBg} p-4`}>
+          <div className="mb-1.5 h-3 w-3/4 rounded bg-white/15" />
+          <div className="mb-1 h-2 w-full rounded bg-white/8" />
+          <div className="mb-3 h-2 w-2/3 rounded bg-white/5" />
+          <div className="h-6 w-20 rounded bg-cyan-500/40" />
         </div>
-
-        {/* Cards */}
-        <div className="grid grid-cols-3 gap-3">
-          {mockup.cards.map((card) => (
-            <div key={card} className="rounded-lg border border-white/5 bg-white/[0.02] p-3">
-              <div className="mb-2 h-12 w-full rounded bg-white/5 sm:h-16" />
-              <div className="mb-1 h-2 w-full rounded bg-white/10" />
-              <div className="h-1.5 w-2/3 rounded bg-white/5" />
-              <p className="mt-2 text-[9px] text-surface-500">{card}</p>
+        <div className="grid grid-cols-3 gap-2">
+          {m.cards.map((c) => (
+            <div key={c} className="rounded border border-white/5 bg-white/[0.02] p-2">
+              <div className="mb-1.5 h-8 rounded bg-white/5" />
+              <div className="h-1.5 w-3/4 rounded bg-white/10" />
+              <p className="mt-1 text-[8px] text-surface-600">{c}</p>
             </div>
           ))}
         </div>
@@ -103,156 +52,131 @@ function MockupSlide({ mockup }: { mockup: (typeof mockups)[0] }) {
 
 export default function Hero({ onStartOnboarding }: HeroProps) {
   const [videoOpen, setVideoOpen] = useState(false);
-  const [current, setCurrent] = useState(0);
+  const [idx, setIdx] = useState(0);
 
   useEffect(() => {
-    const interval = setInterval(() => setCurrent((p) => (p + 1) % mockups.length), 5000);
-    return () => clearInterval(interval);
+    const t = setInterval(() => setIdx((p) => (p + 1) % mockups.length), 5000);
+    return () => clearInterval(t);
   }, []);
 
-  const prev = () => setCurrent((p) => (p - 1 + mockups.length) % mockups.length);
-  const next = () => setCurrent((p) => (p + 1) % mockups.length);
+  const nextIdx = (idx + 1) % mockups.length;
 
   return (
     <>
-      <section className="mesh-gradient relative overflow-hidden pb-16 pt-28 sm:pt-32">
-        {/* Ambient */}
+      <section className="mesh-gradient relative overflow-hidden pt-28 pb-20 sm:pt-36 sm:pb-28 lg:pb-32">
         <div className="pointer-events-none absolute inset-0">
-          <div className="absolute top-20 left-1/4 h-[300px] w-[300px] rounded-full bg-cyan-500/5 blur-[100px]" />
-          <div className="absolute right-1/4 top-40 h-[250px] w-[250px] rounded-full bg-blue-500/5 blur-[80px]" />
+          <div className="absolute top-20 left-[10%] h-[300px] w-[300px] rounded-full bg-cyan-500/5 blur-[100px]" />
+          <div className="absolute right-[5%] bottom-1/4 h-[250px] w-[250px] rounded-full bg-blue-500/4 blur-[80px]" />
         </div>
 
         <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
-          {/* Text content */}
-          <div className="mx-auto max-w-3xl text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="mb-5 inline-flex items-center gap-2 rounded-full border border-cyan-500/20 bg-cyan-500/5 px-4 py-1.5 text-sm font-medium text-cyan-400"
-            >
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-cyan-400" />
-              </span>
-              Website as a Service
-            </motion.div>
-
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
-              className="mb-5 text-3xl leading-tight font-extrabold tracking-tight text-white sm:text-4xl md:text-5xl"
-            >
-              Tu Web Profesional.{" "}
-              <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
-                Sin Límites.
-              </span>
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="mx-auto mb-8 max-w-xl text-base leading-relaxed text-surface-400"
-            >
-              Páginas web profesionales por suscripción mensual. Hosting, mantenimiento
-              y cambios ilimitados. Lanzamos tu web en 48 horas.
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-              className="mb-12 flex flex-col items-center gap-3 sm:flex-row sm:justify-center"
-            >
-              <button
-                onClick={onStartOnboarding}
-                className="group inline-flex items-center gap-2 rounded-xl bg-cyan-500 px-7 py-3.5 text-sm font-semibold text-black transition-all hover:bg-cyan-400 hover:shadow-lg hover:shadow-cyan-500/20"
+          <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-8">
+            {/* Left -- Text (asymmetric, left-aligned) */}
+            <div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="mb-6 inline-flex items-center gap-2 rounded-full border border-cyan-500/20 bg-cyan-500/5 px-4 py-1.5 text-sm font-medium text-cyan-400"
               >
-                Comenzar Mi Proyecto
-                <span className="inline-block transition-transform group-hover:translate-x-1">&rarr;</span>
-              </button>
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-75" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-cyan-400" />
+                </span>
+                Website as a Service
+              </motion.div>
 
-              <button
-                onClick={() => setVideoOpen(true)}
-                className="group inline-flex items-center gap-2 rounded-xl border border-surface-700 px-7 py-3.5 text-sm font-medium text-surface-300 transition-all hover:border-surface-500 hover:text-white"
+              <motion.h1
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.2 }}
+                className="mb-6"
               >
-                <Play className="h-4 w-4 text-cyan-400" />
-                Ver en 60 segundos
-              </button>
+                <span className="block text-3xl font-light tracking-tight text-surface-300 sm:text-4xl md:text-5xl">
+                  Tu Web Profesional.
+                </span>
+                <span className="block text-4xl font-extrabold tracking-tight text-white sm:text-5xl md:text-6xl">
+                  Sin Límites.{" "}
+                  <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+                    Por Suscripción.
+                  </span>
+                </span>
+              </motion.h1>
+
+              <motion.p
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+                className="mb-8 max-w-md text-base leading-relaxed text-surface-400"
+              >
+                Hosting, mantenimiento y cambios ilimitados incluidos.
+                Lanzamos tu web en 48 horas.
+              </motion.p>
+
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.7 }}
+                className="flex flex-wrap gap-3"
+              >
+                <button
+                  onClick={onStartOnboarding}
+                  className="group inline-flex items-center gap-2 rounded-xl bg-cyan-500 px-7 py-3.5 text-sm font-semibold text-black transition-all hover:bg-cyan-400 hover:shadow-lg hover:shadow-cyan-500/20"
+                >
+                  Comenzar Mi Proyecto <span className="transition-transform group-hover:translate-x-1">&rarr;</span>
+                </button>
+                <button
+                  onClick={() => setVideoOpen(true)}
+                  className="group inline-flex items-center gap-2 rounded-xl border border-surface-700 px-7 py-3.5 text-sm font-medium text-surface-300 transition-all hover:border-surface-500 hover:text-white"
+                >
+                  <Play className="h-4 w-4 text-cyan-400" /> Ver en 60s
+                </button>
+              </motion.div>
+            </div>
+
+            {/* Right -- Mockup carousel with overlap */}
+            <motion.div
+              initial={{ opacity: 0, x: 60 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.9, delay: 0.4 }}
+              className="relative lg:translate-x-8 xl:translate-x-16"
+            >
+              {/* Ghost mockup behind */}
+              <div className="absolute -bottom-6 -left-6 z-0 w-[85%] opacity-25 blur-[1px]">
+                <Mockup m={mockups[nextIdx]} className="rotate-[-3deg]" />
+              </div>
+
+              {/* Main mockup */}
+              <div className="relative z-10">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, y: 20, rotate: 0 }}
+                    animate={{ opacity: 1, y: 0, rotate: 2 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.6, ease: "easeInOut" }}
+                  >
+                    <Mockup m={mockups[idx]} />
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+
+              {/* Dots */}
+              <div className="mt-5 flex items-center gap-3">
+                <div className="flex gap-1.5">
+                  {mockups.map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setIdx(i)}
+                      className={`h-1.5 rounded-full transition-all ${i === idx ? "w-6 bg-cyan-400" : "w-1.5 bg-surface-700 hover:bg-surface-500"}`}
+                    />
+                  ))}
+                </div>
+                <span className="text-xs text-surface-500">{mockups[idx].name}</span>
+              </div>
             </motion.div>
           </div>
-
-          {/* Carousel */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-            className="relative mx-auto max-w-3xl"
-          >
-            {/* Slide */}
-            <div className="relative overflow-hidden rounded-2xl">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={current}
-                  initial={{ opacity: 0, x: 60 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -60 }}
-                  transition={{ duration: 0.5, ease: "easeInOut" }}
-                >
-                  <MockupSlide mockup={mockups[current]} />
-                </motion.div>
-              </AnimatePresence>
-            </div>
-
-            {/* Nav arrows */}
-            <button
-              onClick={prev}
-              className="absolute top-1/2 -left-4 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-surface-700 bg-surface-900 text-surface-400 transition-all hover:border-surface-500 hover:text-white sm:-left-12"
-            >
-              <ChevronLeft className="h-4 w-4" />
-            </button>
-            <button
-              onClick={next}
-              className="absolute top-1/2 -right-4 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-surface-700 bg-surface-900 text-surface-400 transition-all hover:border-surface-500 hover:text-white sm:-right-12"
-            >
-              <ChevronRight className="h-4 w-4" />
-            </button>
-
-            {/* Dots + label */}
-            <div className="mt-6 flex items-center justify-center gap-4">
-              <div className="flex gap-2">
-                {mockups.map((m, i) => (
-                  <button
-                    key={m.name}
-                    onClick={() => setCurrent(i)}
-                    className={`h-1.5 rounded-full transition-all duration-300 ${
-                      i === current ? "w-8 bg-cyan-400" : "w-1.5 bg-surface-700 hover:bg-surface-500"
-                    }`}
-                    aria-label={m.name}
-                  />
-                ))}
-              </div>
-              <span className="text-xs text-surface-500">
-                {mockups[current].name} — {mockups[current].category}
-              </span>
-            </div>
-          </motion.div>
         </div>
-
-        {/* Scroll indicator */}
-        <motion.a
-          href="#como-funciona"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5 }}
-          className="mt-12 flex justify-center"
-        >
-          <motion.div animate={{ y: [0, 8, 0] }} transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}>
-            <ArrowDown className="h-5 w-5 text-surface-600" />
-          </motion.div>
-        </motion.a>
       </section>
 
       <VideoModal isOpen={videoOpen} onClose={() => setVideoOpen(false)} />

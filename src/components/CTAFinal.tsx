@@ -8,64 +8,37 @@ interface CTAFinalProps {
 
 export default function CTAFinal({ onStartOnboarding }: CTAFinalProps) {
   return (
-    <section className="mesh-gradient relative flex min-h-[60vh] items-center justify-center overflow-hidden py-24">
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute top-1/3 left-1/3 h-[500px] w-[500px] rounded-full bg-cyan-500/10 blur-[150px]" />
-        <div className="absolute right-1/4 bottom-1/4 h-[400px] w-[400px] rounded-full bg-blue-500/8 blur-[120px]" />
-      </div>
+    <section className="mesh-gradient relative overflow-hidden py-24 sm:py-32">
+      {/* Decorative floating circle */}
+      <div className="pointer-events-none absolute -right-20 top-1/2 h-[400px] w-[400px] -translate-y-1/2 rounded-full bg-gradient-to-br from-cyan-500/10 to-blue-500/5 blur-[80px] animate-float-slow" />
 
-      <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-6 text-sm font-semibold tracking-[0.2em] text-cyan-400 uppercase"
-        >
-          Lanza tu web esta semana
-        </motion.p>
+      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="max-w-2xl">
+          <motion.p initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
+            className="mb-5 text-sm font-semibold tracking-[0.2em] text-cyan-400 uppercase">
+            Lanza tu web esta semana
+          </motion.p>
 
-        <motion.h2
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.1 }}
-          className="mb-8 text-3xl font-bold text-white sm:text-5xl lg:text-6xl"
-        >
-          ¿Listo para<br />
-          <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
-            empezar?
-          </span>
-        </motion.h2>
+          <motion.h2 initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.1 }}
+            className="mb-6 text-3xl sm:text-5xl lg:text-6xl">
+            <span className="font-light text-surface-300">¿Listo para</span><br />
+            <span className="font-extrabold text-white">empezar?</span>
+          </motion.h2>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mx-auto mb-12 max-w-xl text-lg text-surface-400"
-        >
-          Únete a más de 200 negocios que ya dejaron de preocuparse por su web.
-          14 días de garantía de satisfacción.
-        </motion.p>
+          <motion.p initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.3 }}
+            className="mb-10 max-w-lg text-base text-surface-400">
+            Únete a más de 200 negocios que ya dejaron de preocuparse por su web. 14 días de garantía.
+          </motion.p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center"
-        >
-          <button
-            onClick={onStartOnboarding}
-            className="group inline-flex items-center gap-3 rounded-xl bg-cyan-500 px-8 py-4 text-base font-semibold text-black transition-all hover:bg-cyan-400 hover:shadow-lg hover:shadow-cyan-500/20"
-          >
-            Comenzar Mi Proyecto
-            <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
-          </button>
-
-          <CalendlyButton />
-        </motion.div>
+          <motion.div initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.5 }}
+            className="flex flex-wrap gap-4">
+            <button onClick={onStartOnboarding}
+              className="group inline-flex items-center gap-2 rounded-xl bg-cyan-500 px-8 py-4 text-base font-semibold text-black transition-all hover:bg-cyan-400 hover:shadow-lg hover:shadow-cyan-500/20">
+              Comenzar Mi Proyecto <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+            </button>
+            <CalendlyButton />
+          </motion.div>
+        </div>
       </div>
     </section>
   );

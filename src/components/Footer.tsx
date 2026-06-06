@@ -2,28 +2,39 @@ import { Zap } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-surface-800/50 py-16">
+    <footer className="border-t border-surface-800/30 py-16">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="flex flex-col items-center justify-between gap-8 md:flex-row">
-          {/* Logo */}
-          <a href="#" className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-cyan-400 to-blue-500">
-              <Zap className="h-4 w-4 text-black" />
-            </div>
-            <span className="text-lg font-bold text-white">
-              WebFlow<span className="text-cyan-400">Studio</span>
-            </span>
-          </a>
+        {/* Editorial tagline */}
+        <p className="mb-12 text-2xl font-light text-surface-700 sm:text-3xl lg:text-4xl">
+          Hecho para negocios<br />
+          <span className="font-bold text-surface-500">que quieren crecer.</span>
+        </p>
 
-          {/* Links */}
-          <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-surface-500">
-            <a href="#demos" className="transition-colors hover:text-cyan-400">Demos</a>
-            <a href="#precios" className="transition-colors hover:text-cyan-400">Precios</a>
-            <a href="#beneficios" className="transition-colors hover:text-cyan-400">Beneficios</a>
-            <a href="#faq" className="transition-colors hover:text-cyan-400">FAQ</a>
+        <div className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
+          {/* Logo + description */}
+          <div>
+            <a href="#" className="mb-3 flex items-center gap-2">
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-cyan-400 to-blue-500">
+                <Zap className="h-4 w-4 text-black" />
+              </div>
+              <span className="text-lg font-bold text-white">
+                WebFlow<span className="text-cyan-400">Studio</span>
+              </span>
+            </a>
+            <p className="max-w-xs text-sm text-surface-500">
+              Páginas web profesionales por suscripción mensual.
+            </p>
+          </div>
+
+          {/* Links compact */}
+          <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-surface-500">
+            <a href="#demos" className="hover:text-cyan-400">Demos</a>
+            <a href="#precios" className="hover:text-cyan-400">Precios</a>
+            <a href="#beneficios" className="hover:text-cyan-400">Beneficios</a>
+            <a href="#faq" className="hover:text-cyan-400">FAQ</a>
             <span className="text-surface-800">|</span>
-            <a href="#" className="transition-colors hover:text-surface-300">Términos</a>
-            <a href="#" className="transition-colors hover:text-surface-300">Privacidad</a>
+            <a href="#" className="hover:text-surface-300">Términos</a>
+            <a href="#" className="hover:text-surface-300">Privacidad</a>
           </div>
 
           {/* Social */}
@@ -41,8 +52,8 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 text-center text-xs text-surface-700">
-          &copy; {new Date().getFullYear()} WebFlowStudio. Todos los derechos reservados.
+        <div className="mt-10 text-xs text-surface-700">
+          &copy; {new Date().getFullYear()} WebFlowStudio
         </div>
       </div>
     </footer>

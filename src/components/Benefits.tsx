@@ -1,8 +1,9 @@
+import { useRef, type MouseEvent } from "react";
 import { motion } from "framer-motion";
 import {
   Server, RefreshCcw, Headphones, ShieldCheck,
   Search, HardDrive, CreditCard, TrendingUp,
-  X as XIcon, Check,
+  X as XIcon, Check, Zap,
 } from "lucide-react";
 import SectionTitle from "./SectionTitle";
 
@@ -17,20 +18,152 @@ const benefits = [
   { icon: TrendingUp, title: "Escala Sin Límites", description: "Tu web crece contigo.", span: "" },
 ];
 
-const comparison = [
-  { feature: "Costo inicial", traditional: "$3,000 – $10,000", waas: "$0" },
-  { feature: "Hosting incluido", traditional: false, waas: true },
-  { feature: "Mantenimiento", traditional: "Costo extra", waas: "Incluido" },
-  { feature: "Cambios en contenido", traditional: "$50–$150 c/u", waas: "Ilimitados" },
-  { feature: "Certificado SSL", traditional: "Costo extra", waas: "Incluido" },
-  { feature: "Soporte técnico", traditional: "Pago por hora", waas: "Ilimitado" },
-  { feature: "Actualizaciones", traditional: "Tú te encargas", waas: "Automáticas" },
-  { feature: "Backups", traditional: "Manual", waas: "Diarios" },
+const traditionalPains = [
+  "Costo inicial $3,000–$10,000",
+  "Hosting aparte (costo extra)",
+  "Cambios: $50–$150 cada uno",
+  "Soporte: pago por hora",
+  "Actualizaciones: tú te encargas",
+  "Backups: manual o inexistente",
+  "SSL: costo extra",
+  "Resultado: meses de espera",
 ];
 
-function CompValue({ value }: { value: string | boolean }) {
-  if (typeof value === "boolean") return value ? <Check className="h-5 w-5 text-cyan-400" /> : <XIcon className="h-5 w-5 text-red-400/60" />;
-  return <span>{value}</span>;
+const waasPerks = [
+  "Costo inicial: $0",
+  "Hosting premium incluido",
+  "Cambios ilimitados",
+  "Soporte ilimitado",
+  "Actualizaciones automáticas",
+  "Backups diarios",
+  "SSL incluido",
+  "Tu web lista en 48h",
+];
+
+function ComparisonCards() {
+  const waasRef = useRef<HTMLDivElement>(null);
+
+  const handleTilt = (e: MouseEvent<HTMLDivElement>) => {
+    const el = waasRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    el.style.transform = `perspective(800px) rotateY(${x * 6}deg) rotateX(${-y * 6}deg) scale(1.02)`;
+  };
+
+  const resetTilt = () => {
+    if (waasRef.current) waasRef.current.style.transform = "perspective(800px) rotateY(0deg) rotateX(0deg) scale(1)";
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8 }}
+    >
+      <div className="mb-12 text-center">
+        <h3 className="text-3xl font-light text-surface-300 sm:text-4xl">
+          Tradicional <span className="font-extrabold text-white">vs WaaS</span>
+        </h3>
+      </div>
+
+      <div className="relative mx-auto grid max-w-5xl items-stretch gap-6 lg:grid-cols-2 lg:gap-0">
+        {/* VS badge floating center */}
+        <div className="pointer-events-none absolute inset-0 z-20 hidden items-center justify-center lg:flex">
+          <div className="flex h-16 w-16 items-center justify-center rounded-full border border-white/10 bg-black text-xl font-black text-white shadow-2xl">
+            VS
+          </div>
+        </div>
+
+        {/* Traditional card -- desaturated, heavy */}
+        <motion.div
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="group rounded-2xl border border-surface-800/60 bg-surface-950/60 p-8 transition-all duration-300 hover:bg-surface-900/80 lg:rounded-r-none lg:pr-12"
+        >
+          <div className="mb-6 flex items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-surface-800">
+              <XIcon className="h-5 w-5 text-surface-500" />
+            </div>
+            <div>
+              <h4 className="font-bold text-surface-400">Agencia Tradicional</h4>
+              <p className="text-xs text-surface-600">El modelo que ya conoces</p>
+            </div>
+          </div>
+
+          <ul className="space-y-3">
+            {traditionalPains.map((item, i) => (
+              <motion.li
+                key={item}
+                initial={{ opacity: 0, x: -10 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: 0.3 + i * 0.05 }}
+                className="flex items-start gap-3"
+              >
+                <XIcon className="mt-0.5 h-4 w-4 shrink-0 text-red-400/50" />
+                <span className="text-sm text-surface-500">{item}</span>
+              </motion.li>
+            ))}
+          </ul>
+        </motion.div>
+
+        {/* VS badge mobile */}
+        <div className="flex items-center justify-center lg:hidden">
+          <div className="flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-black text-sm font-black text-white">
+            VS
+          </div>
+        </div>
+
+        {/* WaaS card -- glass, glow, tilt, protagonist */}
+        <motion.div
+          initial={{ opacity: 0, x: 30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.15 }}
+          className="relative z-10 lg:-ml-1"
+        >
+          <div
+            ref={waasRef}
+            onMouseMove={handleTilt}
+            onMouseLeave={resetTilt}
+            className="group h-full rounded-2xl glass border-cyan-500/20 p-8 shadow-xl shadow-cyan-500/5 transition-shadow duration-500 hover:shadow-2xl hover:shadow-cyan-500/10 lg:rounded-l-none lg:pl-12"
+            style={{ transformStyle: "preserve-3d", transition: "transform 0.2s ease-out, box-shadow 0.5s ease" }}
+          >
+            <div className="mb-6 flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-500/10 ring-1 ring-cyan-500/20">
+                <Zap className="h-5 w-5 text-cyan-400" />
+              </div>
+              <div>
+                <h4 className="font-bold text-white">Modelo WaaS</h4>
+                <p className="text-xs text-cyan-400/60">La forma inteligente</p>
+              </div>
+            </div>
+
+            <ul className="space-y-3">
+              {waasPerks.map((item, i) => (
+                <motion.li
+                  key={item}
+                  initial={{ opacity: 0, x: 10 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.3, delay: 0.4 + i * 0.06 }}
+                  className="flex items-start gap-3"
+                >
+                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-cyan-400" />
+                  <span className="text-sm text-surface-200">{item}</span>
+                </motion.li>
+              ))}
+            </ul>
+          </div>
+        </motion.div>
+      </div>
+    </motion.div>
+  );
 }
 
 export default function Benefits() {
@@ -62,30 +195,8 @@ export default function Benefits() {
           })}
         </div>
 
-        {/* Comparison -- editorial left-aligned */}
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
-          <h3 className="mb-10 text-2xl sm:text-3xl">
-            <span className="font-light text-surface-300">Tradicional vs</span>{" "}
-            <span className="font-bold text-cyan-400">Modelo WaaS</span>
-          </h3>
-
-          <div className="max-w-3xl overflow-hidden glass rounded-2xl">
-            <div className="grid grid-cols-3 border-b border-white/5 px-6 py-4">
-              <span className="text-sm font-semibold text-surface-400">Característica</span>
-              <span className="text-center text-sm font-semibold text-surface-500">Tradicional</span>
-              <span className="text-center text-sm font-semibold text-cyan-400">WaaS</span>
-            </div>
-            {comparison.map((row, i) => (
-              <motion.div key={row.feature} initial={{ opacity: 0, x: -15 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
-                transition={{ duration: 0.3, delay: i * 0.04 }}
-                className={`grid grid-cols-3 px-6 py-4 ${i % 2 === 0 ? "bg-black" : "bg-surface-950"}`}>
-                <span className="text-sm font-medium text-surface-300">{row.feature}</span>
-                <span className="flex justify-center text-sm text-surface-500"><CompValue value={row.traditional} /></span>
-                <span className="flex justify-center text-sm font-semibold text-cyan-400"><CompValue value={row.waas} /></span>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
+        {/* Comparison -- VS Cards */}
+        <ComparisonCards />
       </div>
     </section>
   );

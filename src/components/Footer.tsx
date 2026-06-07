@@ -53,7 +53,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-10 text-xs text-surface-700">
-          &copy; {new Date().getFullYear()} WebFlowStudio
+          &copy; {new Date().getFullYear()} WebFlowStudio. Todos los derechos reservados.
         </div>
       </div>
     </footer>

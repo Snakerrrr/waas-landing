@@ -208,7 +208,7 @@ function ComparisonCards() {
 
 export default function Benefits() {
   return (
-    <section id="beneficios" className="py-24 sm:py-32">
+    <section id="beneficios" className="py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <SectionTitle eyebrow="Beneficios" lightText="Todo incluido." boldText="Cero sorpresas." className="mb-14" />
 

@@ -38,7 +38,7 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="py-24 sm:py-32">
+    <section id="faq" className="py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {/* Split layout: title left (sticky), accordion right */}
         <div className="lg:grid lg:grid-cols-[1fr_2fr] lg:gap-16">

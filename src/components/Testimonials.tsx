@@ -16,7 +16,7 @@ export default function Testimonials() {
   const rest = testimonials.slice(1);
 
   return (
-    <section className="py-24 sm:py-32">
+    <section className="py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <SectionTitle eyebrow="Testimonios" lightText="Lo que dicen" boldText="nuestros clientes." className="mb-16" />
 

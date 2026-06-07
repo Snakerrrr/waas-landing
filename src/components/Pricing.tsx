@@ -17,7 +17,7 @@ export default function Pricing() {
   const [annual, setAnnual] = useState(false);
 
   return (
-    <section id="precios" className="py-24 sm:py-32">
+    <section id="precios" className="py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <SectionTitle eyebrow="Precios" lightText="Un plan para cada" boldText="etapa de tu negocio." className="mb-4" />
         <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.5 }}

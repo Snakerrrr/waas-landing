@@ -139,7 +139,7 @@ export default function Demos() {
   const filtered = activeCategory === "Todos" ? demos : demos.filter((d) => d.category === activeCategory);
 
   return (
-    <section id="demos" className="py-24 sm:py-32">
+    <section id="demos" className="py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <SectionTitle eyebrow="Portafolio" lightText="Demos listas para" boldText="tu negocio." className="mb-10" />
 

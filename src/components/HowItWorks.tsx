@@ -11,7 +11,7 @@ const steps = [
 
 export default function HowItWorks() {
   return (
-    <section id="como-funciona" className="relative py-24 sm:py-32">
+    <section id="como-funciona" className="relative py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <SectionTitle eyebrow="Proceso" lightText="Tu web lista" boldText="en 4 pasos." className="mb-14" />
 

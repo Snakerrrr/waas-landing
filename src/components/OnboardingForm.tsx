@@ -50,7 +50,6 @@ function Stepper({ current }: { current: number }) {
       {steps.map((s, i) => {
         const done = i < current;
         const active = i === current;
-        const future = i > current;
 
         return (
           <div key={s.title} className="flex flex-1 items-center gap-2">

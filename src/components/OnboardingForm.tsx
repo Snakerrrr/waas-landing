@@ -2,7 +2,9 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   X, ArrowRight, ArrowLeft, Building2, Palette, FileText, CheckCircle2,
-  Upload, User, Mail, Phone, Globe,
+  Upload, User, Mail, Phone, Globe, Check,
+  ShoppingCart, Handshake, HeartPulse, Dumbbell, Home, GraduationCap, Cpu, MoreHorizontal,
+  type LucideIcon,
 } from "lucide-react";
 
 interface OnboardingData {
@@ -18,13 +20,90 @@ const INITIAL: OnboardingData = {
   contentReady: "", pages: [], additionalNotes: "",
 };
 
-const industries = ["Restaurante / Cafetería", "E-Commerce / Tienda", "Servicios Profesionales", "Salud / Clínica", "Fitness / Gimnasio", "Inmobiliaria", "Educación", "Tecnología", "Otro"];
+interface IndustryOption {
+  label: string;
+  icon: LucideIcon;
+}
+
+const industries: IndustryOption[] = [
+  { label: "Restaurante / Cafetería", icon: Building2 },
+  { label: "E-Commerce / Tienda", icon: ShoppingCart },
+  { label: "Servicios Profesionales", icon: Handshake },
+  { label: "Salud / Clínica", icon: HeartPulse },
+  { label: "Fitness / Gimnasio", icon: Dumbbell },
+  { label: "Inmobiliaria", icon: Home },
+  { label: "Educación", icon: GraduationCap },
+  { label: "Tecnología", icon: Cpu },
+  { label: "Otro", icon: MoreHorizontal },
+];
+
 const demoOptions = ["Bella Cucina (Restaurantes)", "ShopNova (E-Commerce)", "LegalPro (Servicios)", "Diseño personalizado"];
 const pageOptions = ["Inicio", "Sobre Nosotros", "Servicios", "Portafolio", "Blog", "Contacto", "Tienda Online", "Reservas", "Testimonios", "FAQ"];
 const steps = [{ title: "Tu Negocio", icon: Building2 }, { title: "Diseño", icon: Palette }, { title: "Contenido", icon: FileText }, { title: "Confirmar", icon: CheckCircle2 }];
 
 const inputClass = "w-full rounded-xl border border-surface-800 bg-surface-950 px-4 py-3 text-white placeholder-surface-600 outline-none transition-all focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20";
-const pillClass = (active: boolean) => `rounded-lg border px-3 py-2.5 text-left text-sm font-medium transition-all ${active ? "border-cyan-500 bg-cyan-500/10 text-cyan-400" : "border-surface-800 text-surface-400 hover:border-surface-600"}`;
+const pillClass = (active: boolean) => `rounded-lg border px-3 py-2.5 text-left text-sm font-medium transition-all duration-200 ${active ? "border-cyan-500 bg-cyan-500/10 text-cyan-400" : "border-surface-800 text-surface-400 hover:border-surface-600"}`;
+
+function Stepper({ current }: { current: number }) {
+  return (
+    <div className="flex border-b border-surface-800 px-6 py-3">
+      {steps.map((s, i) => {
+        const done = i < current;
+        const active = i === current;
+        const future = i > current;
+
+        return (
+          <div key={s.title} className="flex flex-1 items-center gap-2">
+            {/* Circle */}
+            <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-bold transition-all duration-300 ${
+              done ? "bg-cyan-500 text-black" : active ? "bg-cyan-500/20 text-white ring-1 ring-cyan-500/40 shadow-[0_0_12px_rgba(56,189,248,0.15)]" : "bg-surface-900 text-surface-600"
+            }`}>
+              {done ? <Check className="h-4 w-4" /> : i + 1}
+            </div>
+
+            {/* Label */}
+            <span className={`hidden text-xs font-medium transition-colors duration-300 sm:block ${
+              done ? "text-cyan-400" : active ? "text-white" : "text-surface-600"
+            }`}>
+              {s.title}
+            </span>
+
+            {/* Connector line with progress fill */}
+            {i < steps.length - 1 && (
+              <div className="relative mx-2 h-px flex-1 bg-surface-800">
+                <div
+                  className="absolute inset-y-0 left-0 bg-cyan-500 transition-all duration-500 ease-out"
+                  style={{ width: done ? "100%" : active ? "50%" : "0%" }}
+                />
+              </div>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+function IndustryCard({ ind, selected, onSelect }: { ind: IndustryOption; selected: boolean; onSelect: () => void }) {
+  return (
+    <button
+      onClick={onSelect}
+      className={`group relative flex items-center gap-3 rounded-xl border p-3.5 text-left text-sm font-medium transition-all duration-200 ${
+        selected
+          ? "border-cyan-500 bg-cyan-500/10 text-white shadow-[0_0_16px_rgba(56,189,248,0.08)]"
+          : "border-surface-800 text-surface-400 hover:border-surface-600 hover:bg-surface-900/50"
+      }`}
+    >
+      <ind.icon className={`h-4.5 w-4.5 shrink-0 transition-colors duration-200 ${selected ? "text-cyan-400" : "text-surface-500 group-hover:text-surface-400"}`} />
+      <span className="flex-1">{ind.label}</span>
+      {selected && (
+        <div className="flex h-5 w-5 items-center justify-center rounded-full bg-cyan-500">
+          <Check className="h-3 w-3 text-black" />
+        </div>
+      )}
+    </button>
+  );
+}
 
 export default function OnboardingForm({ onClose }: { onClose: () => void }) {
   const [step, setStep] = useState(0);
@@ -67,18 +146,8 @@ export default function OnboardingForm({ onClose }: { onClose: () => void }) {
             <button onClick={onClose} className="text-surface-500 hover:text-white"><X className="h-5 w-5" /></button>
           </div>
 
-          {/* Steps */}
-          <div className="flex border-b border-surface-800 px-6 py-3">
-            {steps.map((s, i) => (
-              <div key={s.title} className="flex flex-1 items-center gap-2">
-                <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-bold ${i < step ? "bg-cyan-500 text-black" : i === step ? "bg-cyan-500/20 text-cyan-400 ring-1 ring-cyan-500/30" : "bg-surface-900 text-surface-600"}`}>
-                  {i < step ? <CheckCircle2 className="h-4 w-4" /> : i + 1}
-                </div>
-                <span className={`hidden text-xs font-medium sm:block ${i === step ? "text-cyan-400" : "text-surface-600"}`}>{s.title}</span>
-                {i < steps.length - 1 && <div className="mx-2 h-px flex-1 bg-surface-800" />}
-              </div>
-            ))}
-          </div>
+          {/* Stepper */}
+          <Stepper current={step} />
 
           {/* Body */}
           <div className="flex-1 overflow-y-auto px-6 py-6">
@@ -93,8 +162,13 @@ export default function OnboardingForm({ onClose }: { onClose: () => void }) {
                   <div><label className="mb-1.5 block text-sm font-medium text-surface-300"><Mail className="mb-0.5 mr-1 inline h-4 w-4" />Email *</label><input type="email" value={data.email} onChange={(e) => update({ email: e.target.value })} placeholder="tu@email.com" className={inputClass} /></div>
                   <div><label className="mb-1.5 block text-sm font-medium text-surface-300"><Phone className="mb-0.5 mr-1 inline h-4 w-4" />WhatsApp</label><input type="tel" value={data.phone} onChange={(e) => update({ phone: e.target.value })} placeholder="+1 555 123 4567" className={inputClass} /></div>
                 </div>
-                <div><label className="mb-2 block text-sm font-medium text-surface-300">Industria *</label>
-                  <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">{industries.map((ind) => (<button key={ind} onClick={() => update({ industry: ind })} className={pillClass(data.industry === ind)}>{ind}</button>))}</div>
+                <div>
+                  <label className="mb-2 block text-sm font-medium text-surface-300">Industria *</label>
+                  <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+                    {industries.map((ind) => (
+                      <IndustryCard key={ind.label} ind={ind} selected={data.industry === ind.label} onSelect={() => update({ industry: ind.label })} />
+                    ))}
+                  </div>
                 </div>
                 <div><label className="mb-1.5 block text-sm font-medium text-surface-300"><Globe className="mb-0.5 mr-1 inline h-4 w-4" />Web actual</label><input type="url" value={data.website} onChange={(e) => update({ website: e.target.value })} placeholder="https://..." className={inputClass} /></div>
               </div>
@@ -103,7 +177,7 @@ export default function OnboardingForm({ onClose }: { onClose: () => void }) {
               <div className="space-y-5">
                 <h3 className="text-lg font-bold text-white">Preferencias de diseño</h3>
                 <div><label className="mb-2 block text-sm font-medium text-surface-300">Demo preferida *</label>
-                  <div className="space-y-2">{demoOptions.map((opt) => (<button key={opt} onClick={() => update({ preferredDemo: opt })} className={`flex w-full items-center gap-3 ${pillClass(data.preferredDemo === opt)}`}><div className={`h-4 w-4 shrink-0 rounded-full border-2 ${data.preferredDemo === opt ? "border-cyan-500 bg-cyan-500" : "border-surface-600"}`} />{opt}</button>))}</div>
+                  <div className="space-y-2">{demoOptions.map((opt) => (<button key={opt} onClick={() => update({ preferredDemo: opt })} className={`flex w-full items-center gap-3 ${pillClass(data.preferredDemo === opt)}`}><div className={`h-4 w-4 shrink-0 rounded-full border-2 transition-all duration-200 ${data.preferredDemo === opt ? "border-cyan-500 bg-cyan-500" : "border-surface-600"}`} /><span className="flex-1 text-left">{opt}</span>{data.preferredDemo === opt && <Check className="h-4 w-4 text-cyan-400" />}</button>))}</div>
                 </div>
                 <div><label className="mb-1.5 block text-sm font-medium text-surface-300"><Palette className="mb-0.5 mr-1 inline h-4 w-4" />Colores de marca</label><input type="text" value={data.brandColors} onChange={(e) => update({ brandColors: e.target.value })} placeholder="Ej: Azul marino y dorado" className={inputClass} /></div>
                 <div><label className="mb-2 block text-sm font-medium text-surface-300"><Upload className="mb-0.5 mr-1 inline h-4 w-4" />¿Tienes logo?</label>

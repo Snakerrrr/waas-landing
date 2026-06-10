@@ -102,7 +102,7 @@ export default function Testimonials() {
   return (
     <section className="py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <SectionTitle eyebrow="Testimonios" lightText="Lo que dicen" boldText="nuestros clientes." className="mb-14" />
+        <SectionTitle eyebrow="Testimonios" title="Lo que dicen" highlight="nuestros clientes." className="mb-14" />
       </div>
 
       {/* Stagger carousel */}

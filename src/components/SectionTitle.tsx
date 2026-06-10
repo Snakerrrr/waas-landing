@@ -2,62 +2,48 @@ import { motion } from "framer-motion";
 
 interface SectionTitleProps {
   eyebrow: string;
-  lightText: string;
-  boldText: string;
+  title: string;
+  highlight?: string;
   className?: string;
 }
 
-const maskVariants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.12 } },
-};
-
-const lineVariants = {
-  hidden: { x: "-110%" },
-  visible: {
-    x: "0%",
-    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const },
-  },
-};
-
-export default function SectionTitle({ eyebrow, lightText, boldText, className = "" }: SectionTitleProps) {
+export default function SectionTitle({ eyebrow, title, highlight, className = "" }: SectionTitleProps) {
   return (
     <motion.div
-      variants={maskVariants}
-      initial="hidden"
-      whileInView="visible"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
-      className={className}
+      transition={{ duration: 0.6 }}
+      className={`flex items-start gap-5 ${className}`}
     >
-      {/* Eyebrow -- tiny, uppercase, wide tracking, subtle accent */}
-      <div className="mb-4 overflow-hidden">
-        <motion.p
-          variants={lineVariants}
-          className="text-xs font-medium tracking-[0.3em] text-cyan-400/70 uppercase"
-        >
-          {eyebrow}
-        </motion.p>
-      </div>
+      {/* Accent line */}
+      <motion.div
+        initial={{ height: 0 }}
+        whileInView={{ height: "100%" }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+        className="mt-1 w-[2px] shrink-0 rounded-full bg-gradient-to-b from-cyan-400 to-cyan-400/0"
+        style={{ minHeight: 40 }}
+      />
 
-      {/* Display heading -- the visual protagonist */}
-      <h2 className="text-4xl sm:text-5xl md:text-6xl">
-        <span className="block overflow-hidden">
-          <motion.span
-            variants={lineVariants}
-            className="block font-extralight tracking-tight text-surface-400"
-          >
-            {lightText}
-          </motion.span>
-        </span>
-        <span className="block overflow-hidden">
-          <motion.span
-            variants={lineVariants}
-            className="block font-extrabold tracking-tight text-white"
-          >
-            {boldText}
-          </motion.span>
-        </span>
-      </h2>
+      <div>
+        {/* Eyebrow */}
+        <p className="mb-2 text-xs font-medium tracking-[0.25em] text-cyan-400/60 uppercase">
+          {eyebrow}
+        </p>
+
+        {/* Title */}
+        <h2 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
+          {highlight ? (
+            <>
+              {title}{" "}
+              <span className="text-cyan-400">{highlight}</span>
+            </>
+          ) : (
+            title
+          )}
+        </h2>
+      </div>
     </motion.div>
   );
 }

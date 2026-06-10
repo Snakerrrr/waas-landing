@@ -58,7 +58,7 @@ export default function Pricing() {
   return (
     <section id="precios" className="py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <SectionTitle eyebrow="Precios" lightText="Simple y" boldText="transparente." className="mb-4" />
+        <SectionTitle eyebrow="Precios" title="Simple y" highlight="transparente." className="mb-4" />
         <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}

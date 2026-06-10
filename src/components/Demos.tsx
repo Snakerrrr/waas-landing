@@ -152,7 +152,7 @@ export default function Demos() {
   return (
     <section id="demos" className="py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <SectionTitle eyebrow="Portafolio" lightText="Demos listas para" boldText="tu negocio." className="mb-14" />
+        <SectionTitle eyebrow="Portafolio" title="Demos listas para" highlight="tu negocio." className="mb-14" />
 
         <SliderCtx.Provider value={{ active, setActive }}>
           <div className="grid gap-8 lg:grid-cols-[1fr_1.2fr] lg:gap-12">

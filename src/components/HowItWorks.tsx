@@ -13,7 +13,7 @@ export default function HowItWorks() {
   return (
     <section id="como-funciona" className="py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <SectionTitle eyebrow="Proceso" lightText="Tu web lista" boldText="en 4 pasos." className="mb-16" />
+        <SectionTitle eyebrow="Proceso" title="Tu web lista" highlight="en 4 pasos." className="mb-16" />
 
         {/* Horizontal timeline */}
         <div className="relative">

@@ -112,13 +112,9 @@ export default function Hero({ onStartOnboarding }: HeroProps) {
   return (
     <>
       <section className="relative flex min-h-[90vh] items-center justify-center overflow-hidden sm:min-h-screen">
-        {/* Aurora background -- no grid */}
+        {/* Subtle top gradient only */}
         <div className="pointer-events-none absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-b from-cyan-500/[0.07] via-transparent to-transparent" />
-          <div className="absolute top-[-20%] left-1/2 h-[600px] w-[800px] -translate-x-1/2 rounded-full bg-cyan-500/10 blur-[150px]" />
-          <div className="absolute top-[10%] right-[-10%] h-[400px] w-[400px] rounded-full bg-blue-500/8 blur-[120px]" />
-          <div className="absolute bottom-[-10%] left-[-5%] h-[350px] w-[350px] rounded-full bg-violet-500/6 blur-[100px]" />
-          <div className="absolute inset-x-0 bottom-0 h-60 bg-gradient-to-t from-[#0B0F19] via-[#0B0F19]/80 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-b from-white/[0.02] via-transparent to-transparent" />
         </div>
 
         {/* Content */}
@@ -206,7 +202,7 @@ export default function Hero({ onStartOnboarding }: HeroProps) {
         </motion.div>
 
         {/* Image marquee behind text */}
-        <div className="pointer-events-none absolute bottom-12 left-0 h-1/4 w-full opacity-[0.08] sm:h-1/3"
+        <div className="pointer-events-none absolute bottom-16 left-0 h-1/4 w-full opacity-[0.06] sm:h-1/3"
           style={{
             maskImage: "linear-gradient(to bottom, transparent, black 20%, black 70%, transparent)",
             WebkitMaskImage: "linear-gradient(to bottom, transparent, black 20%, black 70%, transparent)",

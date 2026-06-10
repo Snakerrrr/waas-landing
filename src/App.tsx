@@ -1,6 +1,6 @@
 import { useState } from "react";
 import SmoothScroll from "./components/SmoothScroll";
-import GridSpotlight from "./components/GridSpotlight";
+import GradientDots from "./components/GradientDots";
 import Navbar from "./components/Navbar";
 import UrgencyBanner from "./components/UrgencyBanner";
 import Hero from "./components/Hero";
@@ -23,7 +23,7 @@ export default function App() {
   return (
     <SmoothScroll>
       <div className="relative min-h-screen text-surface-200">
-        <GridSpotlight />
+        <GradientDots />
         <div className="relative z-10">
           <Navbar onStartOnboarding={openOnboarding} />
           <UrgencyBanner onStartOnboarding={openOnboarding} />

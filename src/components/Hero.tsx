@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Play, ArrowRight, Sparkles } from "lucide-react";
 import VideoModal from "./VideoModal";
 
@@ -50,7 +50,7 @@ function Typewriter({ phrases: items }: { phrases: string[] }) {
       {current.slice(0, charIdx)}
       <motion.span
         animate={{ opacity: [1, 0] }}
-        transition={{ repeat: Infinity, duration: 0.6, ease: "steps(2)" }}
+        transition={{ repeat: Infinity, duration: 0.6, ease: "linear" }}
         className="ml-0.5 inline-block w-[3px] bg-cyan-400 align-middle sm:w-[4px]"
         style={{ height: "0.85em" }}
       />

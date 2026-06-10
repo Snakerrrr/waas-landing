@@ -10,7 +10,7 @@ export default function HeroWave() {
     if (!ctx) return;
 
     let width: number, height: number, imageData: ImageData, data: Uint8ClampedArray;
-    const SCALE = 2;
+    const SCALE = 6;
     let animationId: number;
 
     const resizeCanvas = () => {
@@ -45,7 +45,14 @@ export default function HeroWave() {
       return COS_TABLE[index];
     };
 
-    const render = () => {
+    let lastFrame = 0;
+    const FPS_INTERVAL = 1000 / 30;
+
+    const render = (now: number = 0) => {
+      animationId = requestAnimationFrame(render);
+      if (now - lastFrame < FPS_INTERVAL) return;
+      lastFrame = now;
+
       const time = (Date.now() - startTime) * 0.001;
 
       for (let y = 0; y < height; y++) {
@@ -83,10 +90,9 @@ export default function HeroWave() {
         ctx.drawImage(canvas, 0, 0, width, height, 0, 0, canvas.width, canvas.height);
       }
 
-      animationId = requestAnimationFrame(render);
     };
 
-    render();
+    animationId = requestAnimationFrame(render);
 
     return () => {
       window.removeEventListener("resize", resizeCanvas);

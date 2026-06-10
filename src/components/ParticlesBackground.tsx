@@ -79,7 +79,7 @@ export default function ParticlesBackground() {
   return (
     <div
       id="particles-js"
-      className="fixed inset-0 -z-10 bg-gradient-to-tr from-[#000814] via-[#003566] to-[#0077b6]"
+      className="fixed inset-0 -z-10 bg-gradient-to-tr from-[#000000] via-[#000a1a] to-[#001a33]"
     />
   );
 }

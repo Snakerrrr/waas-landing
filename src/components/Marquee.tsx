@@ -51,7 +51,6 @@ function TextRoll() {
 
 export default function Marquee() {
   const scrollRef = useRef<HTMLDivElement>(null);
-  const [scrollPos, setScrollPos] = useState(0);
 
   useEffect(() => {
     const el = scrollRef.current;
@@ -64,7 +63,6 @@ export default function Marquee() {
       pos += 0.5;
       if (pos >= el.scrollWidth / 2) pos = 0;
       el.scrollLeft = pos;
-      setScrollPos(pos);
       animId = requestAnimationFrame(step);
     };
 

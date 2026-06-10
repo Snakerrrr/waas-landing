@@ -1,6 +1,5 @@
 import { useState } from "react";
 import SmoothScroll from "./components/SmoothScroll";
-import InteractiveBackground from "./components/InteractiveBackground";
 import Navbar from "./components/Navbar";
 import UrgencyBanner from "./components/UrgencyBanner";
 import Hero from "./components/Hero";
@@ -22,7 +21,7 @@ export default function App() {
 
   return (
     <SmoothScroll>
-      <InteractiveBackground>
+      <div className="relative min-h-screen text-surface-200">
         <Navbar onStartOnboarding={openOnboarding} />
         <UrgencyBanner onStartOnboarding={openOnboarding} />
         <main>
@@ -39,7 +38,7 @@ export default function App() {
         <Footer />
         <WhatsAppButton />
         {showOnboarding && <OnboardingForm onClose={() => setShowOnboarding(false)} />}
-      </InteractiveBackground>
+      </div>
     </SmoothScroll>
   );
 }

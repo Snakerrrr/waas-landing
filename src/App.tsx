@@ -1,6 +1,6 @@
 import { useState } from "react";
 import SmoothScroll from "./components/SmoothScroll";
-import Starfield from "./components/Starfield";
+import GradientBackground from "./components/GradientBackground";
 import Navbar from "./components/Navbar";
 import UrgencyBanner from "./components/UrgencyBanner";
 import Hero from "./components/Hero";
@@ -22,27 +22,24 @@ export default function App() {
 
   return (
     <SmoothScroll>
-      <div className="relative min-h-screen text-surface-200">
-        <Starfield />
-        <div className="relative z-10">
-          <Navbar onStartOnboarding={openOnboarding} />
-          <UrgencyBanner onStartOnboarding={openOnboarding} />
-          <main>
-            <Hero onStartOnboarding={openOnboarding} />
-            <Marquee />
-            <HowItWorks />
-            <Demos />
+      <GradientBackground>
+        <Navbar onStartOnboarding={openOnboarding} />
+        <UrgencyBanner onStartOnboarding={openOnboarding} />
+        <main>
+          <Hero onStartOnboarding={openOnboarding} />
+          <Marquee />
+          <HowItWorks />
+          <Demos />
           <Benefits />
           <Testimonials />
-            <Pricing />
-            <FAQ />
-            <CTAFinal onStartOnboarding={openOnboarding} />
-          </main>
-          <Footer />
-          <WhatsAppButton />
-          {showOnboarding && <OnboardingForm onClose={() => setShowOnboarding(false)} />}
-        </div>
-      </div>
+          <Pricing />
+          <FAQ />
+          <CTAFinal onStartOnboarding={openOnboarding} />
+        </main>
+        <Footer />
+        <WhatsAppButton />
+        {showOnboarding && <OnboardingForm onClose={() => setShowOnboarding(false)} />}
+      </GradientBackground>
     </SmoothScroll>
   );
 }

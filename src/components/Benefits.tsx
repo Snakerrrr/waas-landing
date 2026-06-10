@@ -135,12 +135,14 @@ export default function Benefits() {
             {doubled.map((b, i) => (
               <div
                 key={`${b.title}-${i}`}
-                className="mx-3 inline-flex shrink-0 items-center gap-3 rounded-xl border border-white/[0.06] bg-[#1E293B]/60 px-5 py-3.5 transition-all duration-300 hover:border-cyan-500/20 hover:bg-[#1E293B]"
+                className="mx-3 inline-flex shrink-0 items-center gap-4 rounded-2xl border border-white/[0.06] bg-[#1E293B]/60 px-7 py-5 transition-all duration-300 hover:border-cyan-500/20 hover:bg-[#1E293B]"
               >
-                <b.icon className="h-5 w-5 shrink-0 text-cyan-400" />
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-cyan-500/10">
+                  <b.icon className="h-5 w-5 text-cyan-400" />
+                </div>
                 <div>
-                  <p className="text-sm font-semibold text-white">{b.title}</p>
-                  <p className="text-xs text-surface-400">{b.description}</p>
+                  <p className="text-base font-semibold text-white">{b.title}</p>
+                  <p className="text-sm text-surface-400">{b.description}</p>
                 </div>
               </div>
             ))}

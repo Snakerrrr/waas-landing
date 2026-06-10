@@ -20,11 +20,21 @@ const stats = [
   { value: "99.9%", label: "Uptime garantizado" },
 ];
 
-function Typewriter({ phrases: items }: { phrases: string[] }) {
+const showcaseImages = [
+  "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=530&fit=crop",
+  "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=530&fit=crop",
+  "https://images.unsplash.com/photo-1559028012-481c04fa702d?w=400&h=530&fit=crop",
+  "https://images.unsplash.com/photo-1547658719-da2b51169166?w=400&h=530&fit=crop",
+  "https://images.unsplash.com/photo-1517292987719-0369a794ec0f?w=400&h=530&fit=crop",
+  "https://images.unsplash.com/photo-1522542550221-31fd19575a2d?w=400&h=530&fit=crop",
+  "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&h=530&fit=crop",
+  "https://images.unsplash.com/photo-1542744094-3a31f272c490?w=400&h=530&fit=crop",
+];
+
+function Typewriter({ items }: { items: string[] }) {
   const [phraseIdx, setPhraseIdx] = useState(0);
   const [charIdx, setCharIdx] = useState(0);
   const [deleting, setDeleting] = useState(false);
-
   const current = items[phraseIdx];
 
   useEffect(() => {
@@ -48,40 +58,29 @@ function Typewriter({ phrases: items }: { phrases: string[] }) {
   return (
     <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-violet-400 bg-clip-text text-transparent">
       {current.slice(0, charIdx)}
-      <motion.span
-        animate={{ opacity: [1, 0] }}
-        transition={{ repeat: Infinity, duration: 0.6, ease: "linear" }}
-        className="ml-0.5 inline-block w-[3px] bg-cyan-400 align-middle sm:w-[4px]"
-        style={{ height: "0.85em" }}
-      />
+      <span className="ml-0.5 inline-block w-[3px] animate-pulse bg-cyan-400 align-middle sm:w-[4px]" style={{ height: "0.8em" }} />
     </span>
   );
 }
 
 export default function Hero({ onStartOnboarding }: HeroProps) {
   const [videoOpen, setVideoOpen] = useState(false);
+  const doubled = [...showcaseImages, ...showcaseImages];
 
   return (
     <>
       <section className="relative flex min-h-[90vh] items-center justify-center overflow-hidden sm:min-h-screen">
-        {/* Aurora background */}
+        {/* Aurora background -- no grid */}
         <div className="pointer-events-none absolute inset-0">
           <div className="absolute inset-0 bg-gradient-to-b from-cyan-500/[0.07] via-transparent to-transparent" />
           <div className="absolute top-[-20%] left-1/2 h-[600px] w-[800px] -translate-x-1/2 rounded-full bg-cyan-500/10 blur-[150px]" />
           <div className="absolute top-[10%] right-[-10%] h-[400px] w-[400px] rounded-full bg-blue-500/8 blur-[120px]" />
           <div className="absolute bottom-[-10%] left-[-5%] h-[350px] w-[350px] rounded-full bg-violet-500/6 blur-[100px]" />
-          <div
-            className="absolute inset-0 opacity-[0.04]"
-            style={{
-              backgroundImage: "linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)",
-              backgroundSize: "60px 60px",
-            }}
-          />
           <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#0B0F19] to-transparent" />
         </div>
 
+        {/* Content */}
         <div className="relative z-10 mx-auto max-w-5xl px-6 py-20 text-center">
-          {/* Badge */}
           <motion.div
             initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
@@ -92,7 +91,6 @@ export default function Hero({ onStartOnboarding }: HeroProps) {
             Website as a Service
           </motion.div>
 
-          {/* Headline with typewriter */}
           <motion.h1
             initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
@@ -100,10 +98,9 @@ export default function Hero({ onStartOnboarding }: HeroProps) {
             className="mb-6 text-5xl leading-[1.1] font-extrabold tracking-tight sm:text-6xl md:text-7xl lg:text-8xl"
           >
             <span className="block text-white">Creamos Webs</span>
-            <Typewriter phrases={phrases} />
+            <Typewriter items={phrases} />
           </motion.h1>
 
-          {/* Subtitle */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -114,7 +111,6 @@ export default function Hero({ onStartOnboarding }: HeroProps) {
             Hosting, mantenimiento y cambios ilimitados incluidos.
           </motion.p>
 
-          {/* CTAs */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
@@ -137,7 +133,6 @@ export default function Hero({ onStartOnboarding }: HeroProps) {
             </button>
           </motion.div>
 
-          {/* Stats */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
@@ -151,6 +146,35 @@ export default function Hero({ onStartOnboarding }: HeroProps) {
                   <p className="text-2xl font-bold text-white">{stat.value}</p>
                   <p className="text-xs text-surface-500">{stat.label}</p>
                 </div>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+
+        {/* Image marquee behind text */}
+        <div className="pointer-events-none absolute bottom-0 left-0 h-1/3 w-full opacity-[0.12] sm:h-2/5"
+          style={{
+            maskImage: "linear-gradient(to bottom, transparent, black 20%, black 70%, transparent)",
+            WebkitMaskImage: "linear-gradient(to bottom, transparent, black 20%, black 70%, transparent)",
+          }}
+        >
+          <motion.div
+            className="flex gap-4"
+            animate={{ x: ["-50%", "0%"] }}
+            transition={{ ease: "linear", duration: 50, repeat: Infinity }}
+          >
+            {doubled.map((src, i) => (
+              <div
+                key={i}
+                className="relative h-48 w-36 shrink-0 sm:h-64 sm:w-48"
+                style={{ rotate: `${i % 2 === 0 ? -2 : 4}deg` }}
+              >
+                <img
+                  src={src}
+                  alt=""
+                  loading="lazy"
+                  className="h-full w-full rounded-2xl object-cover"
+                />
               </div>
             ))}
           </motion.div>

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import SmoothScroll from "./components/SmoothScroll";
 import HeroWave from "./components/HeroWave";
+import SectionDivider from "./components/SectionDivider";
 import Navbar from "./components/Navbar";
 import UrgencyBanner from "./components/UrgencyBanner";
 import Hero from "./components/Hero";
@@ -28,12 +29,19 @@ export default function App() {
           <UrgencyBanner onStartOnboarding={openOnboarding} />
           <main>
             <Hero onStartOnboarding={openOnboarding} />
+            <SectionDivider />
             <HowItWorks />
+            <SectionDivider />
             <Demos />
+            <SectionDivider />
             <Benefits />
+            <SectionDivider />
             <Testimonials />
+            <SectionDivider />
             <Pricing />
+            <SectionDivider />
             <FAQ />
+            <SectionDivider />
             <CTAFinal onStartOnboarding={openOnboarding} />
           </main>
           <Footer />

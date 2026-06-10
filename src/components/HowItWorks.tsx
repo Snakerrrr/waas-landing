@@ -3,43 +3,54 @@ import { MousePointerClick, Paintbrush, Rocket, Wrench } from "lucide-react";
 import SectionTitle from "./SectionTitle";
 
 const steps = [
-  { num: "01", icon: MousePointerClick, title: "Elige tu Diseño", description: "Explora nuestras demos y selecciona la plantilla que mejor se adapte a tu negocio.", span: "md:col-span-2" },
-  { num: "02", icon: Paintbrush, title: "Personalizamos Todo", description: "Adaptamos colores, contenido e imágenes a tu marca. Listo en 48h.", span: "" },
-  { num: "03", icon: Rocket, title: "Lanzamos tu Web", description: "Tu sitio sale al aire con hosting ultra-rápido, SSL y SEO incluido.", span: "" },
-  { num: "04", icon: Wrench, title: "Mantenimiento Continuo", description: "Actualizaciones, seguridad, backups y cambios ilimitados cada mes.", span: "md:col-span-2" },
+  { num: "01", icon: MousePointerClick, title: "Elige tu Diseño", description: "Explora nuestras demos y selecciona la plantilla ideal para tu negocio." },
+  { num: "02", icon: Paintbrush, title: "Personalizamos", description: "Adaptamos colores, contenido e imágenes a tu marca. Listo en 48h." },
+  { num: "03", icon: Rocket, title: "Lanzamos", description: "Tu sitio sale al aire con hosting ultra-rápido, SSL y SEO incluido." },
+  { num: "04", icon: Wrench, title: "Mantenemos", description: "Actualizaciones, seguridad, backups y cambios ilimitados cada mes." },
 ];
 
 export default function HowItWorks() {
   return (
-    <section id="como-funciona" className="relative py-16 sm:py-24">
+    <section id="como-funciona" className="py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <SectionTitle eyebrow="Proceso" lightText="Tu web lista" boldText="en 4 pasos." className="mb-14" />
+        <SectionTitle eyebrow="Proceso" lightText="Tu web lista" boldText="en 4 pasos." className="mb-16" />
 
-        {/* Bento Grid */}
-        <div className="grid gap-4 md:grid-cols-2">
-          {steps.map((s, i) => (
-            <motion.div
-              key={s.num}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className={`group relative overflow-hidden glass rounded-2xl p-8 transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-white/20 hover:shadow-lg hover:shadow-white/[0.02] ${s.span}`}
-            >
-              {/* Decorative number -- overlapping top-right */}
-              <span className="pointer-events-none absolute -top-4 -right-2 text-[7rem] font-extrabold leading-none text-surface-900/40 select-none transition-colors group-hover:text-cyan-500/5">
-                {s.num}
-              </span>
+        {/* Horizontal timeline */}
+        <div className="relative">
+          {/* Connector line */}
+          <div className="absolute top-[38px] left-0 right-0 hidden h-px bg-gradient-to-r from-transparent via-cyan-500/20 to-transparent md:block" />
 
-              <div className="relative z-10">
-                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl glass-light transition-colors duration-300 group-hover:border-cyan-500/20">
-                  <s.icon className="h-6 w-6 text-cyan-400 transition-transform duration-300 group-hover:scale-110" />
+          <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-4">
+            {steps.map((s, i) => (
+              <motion.div
+                key={s.num}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.12 }}
+                className="group relative text-center"
+              >
+                {/* Number circle */}
+                <div className="relative z-10 mx-auto mb-5 flex h-[76px] w-[76px] items-center justify-center">
+                  {/* Outer ring */}
+                  <div className="absolute inset-0 rounded-full border border-white/[0.06] transition-colors duration-300 group-hover:border-cyan-500/30" />
+                  {/* Inner circle */}
+                  <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[#1E293B] transition-all duration-300 group-hover:bg-cyan-500/10 group-hover:shadow-lg group-hover:shadow-cyan-500/10">
+                    <s.icon className="h-6 w-6 text-surface-400 transition-all duration-300 group-hover:scale-110 group-hover:text-cyan-400" />
+                  </div>
                 </div>
-                <h3 className="mb-2 text-xl font-semibold text-white">{s.title}</h3>
-                <p className="max-w-sm text-sm leading-relaxed text-surface-400">{s.description}</p>
-              </div>
-            </motion.div>
-          ))}
+
+                {/* Step number */}
+                <p className="mb-2 text-xs font-medium tracking-[0.3em] text-cyan-400/50 uppercase">{s.num}</p>
+
+                {/* Title */}
+                <h3 className="mb-2 text-lg font-semibold text-white">{s.title}</h3>
+
+                {/* Description */}
+                <p className="mx-auto max-w-[200px] text-sm leading-relaxed text-surface-400">{s.description}</p>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

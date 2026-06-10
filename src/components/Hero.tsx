@@ -1,6 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { Play, ArrowRight, Sparkles } from "lucide-react";
+import { Play, ArrowRight, Sparkles,
+  ShoppingCart, Handshake, HeartPulse, Dumbbell,
+  Building2, GraduationCap, Cpu, Palette, UtensilsCrossed, Scale,
+  type LucideIcon,
+} from "lucide-react";
 import VideoModal from "./VideoModal";
 
 interface HeroProps {
@@ -13,6 +17,44 @@ const phrases = [
   "Por Suscripción.",
   "Lista en 48 Horas.",
 ];
+
+interface Logo { name: string; icon: LucideIcon; }
+const logos: Logo[] = [
+  { name: "E-Commerce", icon: ShoppingCart }, { name: "Servicios", icon: Handshake },
+  { name: "Salud", icon: HeartPulse }, { name: "Fitness", icon: Dumbbell },
+  { name: "Inmobiliarias", icon: Building2 }, { name: "Educación", icon: GraduationCap },
+  { name: "Tecnología", icon: Cpu }, { name: "Diseño", icon: Palette },
+  { name: "Restaurantes", icon: UtensilsCrossed }, { name: "Legal", icon: Scale },
+];
+
+function LogoTicker() {
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    let pos = 0;
+    let id: number;
+    const step = () => { pos += 0.5; if (pos >= el.scrollWidth / 2) pos = 0; el.scrollLeft = pos; id = requestAnimationFrame(step); };
+    id = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(id);
+  }, []);
+  const doubled = [...logos, ...logos];
+  return (
+    <div className="w-full border-t border-white/[0.04] pt-6 pb-2">
+      <p className="mb-4 text-center text-xs font-medium tracking-[0.2em] text-surface-500 uppercase">
+        Diseños para cada industria
+      </p>
+      <div ref={ref} className="flex w-full gap-1 overflow-hidden" style={{ scrollBehavior: "auto" }}>
+        {doubled.map((l, i) => (
+          <div key={`${l.name}-${i}`} className="flex h-16 w-36 shrink-0 items-center justify-center gap-2.5 rounded-lg transition-colors hover:bg-white/5 sm:w-44">
+            <l.icon className="h-5 w-5 shrink-0 text-surface-500" />
+            <span className="text-sm font-medium text-surface-500">{l.name}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 const stats = [
   { value: "200+", label: "Negocios activos" },
@@ -76,7 +118,7 @@ export default function Hero({ onStartOnboarding }: HeroProps) {
           <div className="absolute top-[-20%] left-1/2 h-[600px] w-[800px] -translate-x-1/2 rounded-full bg-cyan-500/10 blur-[150px]" />
           <div className="absolute top-[10%] right-[-10%] h-[400px] w-[400px] rounded-full bg-blue-500/8 blur-[120px]" />
           <div className="absolute bottom-[-10%] left-[-5%] h-[350px] w-[350px] rounded-full bg-violet-500/6 blur-[100px]" />
-          <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#0B0F19] to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 h-60 bg-gradient-to-t from-[#0B0F19] via-[#0B0F19]/80 to-transparent" />
         </div>
 
         {/* Content */}
@@ -151,8 +193,20 @@ export default function Hero({ onStartOnboarding }: HeroProps) {
           </motion.div>
         </div>
 
+        {/* Logo ticker at bottom */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 1.2 }}
+          className="absolute inset-x-0 bottom-0 z-10 px-6"
+        >
+          <div className="mx-auto max-w-5xl">
+            <LogoTicker />
+          </div>
+        </motion.div>
+
         {/* Image marquee behind text */}
-        <div className="pointer-events-none absolute bottom-0 left-0 h-1/3 w-full opacity-[0.12] sm:h-2/5"
+        <div className="pointer-events-none absolute bottom-12 left-0 h-1/4 w-full opacity-[0.08] sm:h-1/3"
           style={{
             maskImage: "linear-gradient(to bottom, transparent, black 20%, black 70%, transparent)",
             WebkitMaskImage: "linear-gradient(to bottom, transparent, black 20%, black 70%, transparent)",

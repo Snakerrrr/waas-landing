@@ -4,7 +4,6 @@ import HeroWave from "./components/HeroWave";
 import Navbar from "./components/Navbar";
 import UrgencyBanner from "./components/UrgencyBanner";
 import Hero from "./components/Hero";
-import Marquee from "./components/Marquee";
 import HowItWorks from "./components/HowItWorks";
 import Demos from "./components/Demos";
 import Benefits from "./components/Benefits";
@@ -29,7 +28,6 @@ export default function App() {
           <UrgencyBanner onStartOnboarding={openOnboarding} />
           <main>
             <Hero onStartOnboarding={openOnboarding} />
-            <Marquee />
             <HowItWorks />
             <Demos />
             <Benefits />

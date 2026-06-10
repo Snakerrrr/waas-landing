@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Play, ArrowRight, Sparkles } from "lucide-react";
 import VideoModal from "./VideoModal";
 
@@ -7,11 +7,56 @@ interface HeroProps {
   onStartOnboarding: () => void;
 }
 
+const phrases = [
+  "Tu Web Profesional.",
+  "Sin Límites.",
+  "Por Suscripción.",
+  "Lista en 48 Horas.",
+];
+
 const stats = [
   { value: "200+", label: "Negocios activos" },
   { value: "48h", label: "Tiempo de lanzamiento" },
   { value: "99.9%", label: "Uptime garantizado" },
 ];
+
+function Typewriter({ phrases: items }: { phrases: string[] }) {
+  const [phraseIdx, setPhraseIdx] = useState(0);
+  const [charIdx, setCharIdx] = useState(0);
+  const [deleting, setDeleting] = useState(false);
+
+  const current = items[phraseIdx];
+
+  useEffect(() => {
+    const speed = deleting ? 40 : 80;
+    const pause = !deleting && charIdx === current.length ? 2000 : deleting && charIdx === 0 ? 500 : speed;
+
+    const timer = setTimeout(() => {
+      if (!deleting && charIdx === current.length) {
+        setDeleting(true);
+      } else if (deleting && charIdx === 0) {
+        setDeleting(false);
+        setPhraseIdx((p) => (p + 1) % items.length);
+      } else {
+        setCharIdx((p) => p + (deleting ? -1 : 1));
+      }
+    }, pause);
+
+    return () => clearTimeout(timer);
+  }, [charIdx, deleting, current, items]);
+
+  return (
+    <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-violet-400 bg-clip-text text-transparent">
+      {current.slice(0, charIdx)}
+      <motion.span
+        animate={{ opacity: [1, 0] }}
+        transition={{ repeat: Infinity, duration: 0.6, ease: "steps(2)" }}
+        className="ml-0.5 inline-block w-[3px] bg-cyan-400 align-middle sm:w-[4px]"
+        style={{ height: "0.85em" }}
+      />
+    </span>
+  );
+}
 
 export default function Hero({ onStartOnboarding }: HeroProps) {
   const [videoOpen, setVideoOpen] = useState(false);
@@ -19,14 +64,12 @@ export default function Hero({ onStartOnboarding }: HeroProps) {
   return (
     <>
       <section className="relative flex min-h-[90vh] items-center justify-center overflow-hidden sm:min-h-screen">
-        {/* Animated aurora background */}
+        {/* Aurora background */}
         <div className="pointer-events-none absolute inset-0">
           <div className="absolute inset-0 bg-gradient-to-b from-cyan-500/[0.07] via-transparent to-transparent" />
           <div className="absolute top-[-20%] left-1/2 h-[600px] w-[800px] -translate-x-1/2 rounded-full bg-cyan-500/10 blur-[150px]" />
           <div className="absolute top-[10%] right-[-10%] h-[400px] w-[400px] rounded-full bg-blue-500/8 blur-[120px]" />
           <div className="absolute bottom-[-10%] left-[-5%] h-[350px] w-[350px] rounded-full bg-violet-500/6 blur-[100px]" />
-
-          {/* Grid pattern over aurora */}
           <div
             className="absolute inset-0 opacity-[0.04]"
             style={{
@@ -34,8 +77,6 @@ export default function Hero({ onStartOnboarding }: HeroProps) {
               backgroundSize: "60px 60px",
             }}
           />
-
-          {/* Radial fade at bottom */}
           <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#0B0F19] to-transparent" />
         </div>
 
@@ -51,18 +92,15 @@ export default function Hero({ onStartOnboarding }: HeroProps) {
             Website as a Service
           </motion.div>
 
-          {/* Headline -- massive, centered */}
+          {/* Headline with typewriter */}
           <motion.h1
             initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="mb-6 text-5xl leading-[1.1] font-extrabold tracking-tight sm:text-6xl md:text-7xl lg:text-8xl"
           >
-            <span className="text-white">Tu Web Profesional.</span>
-            <br />
-            <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-violet-400 bg-clip-text text-transparent">
-              Sin Límites.
-            </span>
+            <span className="block text-white">Creamos Webs</span>
+            <Typewriter phrases={phrases} />
           </motion.h1>
 
           {/* Subtitle */}

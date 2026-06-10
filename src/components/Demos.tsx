@@ -1,7 +1,6 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ExternalLink, Clock, Bell, Eye, X } from "lucide-react";
-import { useTilt } from "../hooks/useTilt";
+import { useState, useCallback, createContext, useContext } from "react";
+import { motion, AnimatePresence, MotionConfig } from "framer-motion";
+import { ExternalLink, Clock, Bell, Eye, X, ArrowUpRight } from "lucide-react";
 import SectionTitle from "./SectionTitle";
 
 type DemoStatus = "live" | "coming_soon";
@@ -16,17 +15,100 @@ interface Demo {
   url: string | null;
 }
 
-const categories = ["Todos", "Restaurantes", "E-Commerce", "Servicios", "Salud", "Fitness", "Inmobiliaria"];
-
 const demos: Demo[] = [
-  { title: "Bella Cucina", category: "Restaurantes", description: "Menú interactivo con reservas online, galería de platos y sistema de pedidos.", gradient: "from-orange-500/20 to-red-500/20", tag: "Live", status: "live", url: "https://demo-restaurante.tudominio.com" },
-  { title: "ShopNova", category: "E-Commerce", description: "Tienda online completa con carrito, pagos integrados y gestión de inventario.", gradient: "from-blue-500/20 to-indigo-500/20", tag: "Live", status: "live", url: "https://demo-ecommerce.tudominio.com" },
-  { title: "LegalPro", category: "Servicios", description: "Firma de abogados con agenda online, blog de contenidos y chat en vivo.", gradient: "from-surface-500/20 to-surface-600/20", tag: "Live", status: "live", url: "https://demo-legal.tudominio.com" },
-  { title: "VitalCare", category: "Salud", description: "Clínica médica con citas online, perfiles de doctores y portal de pacientes.", gradient: "from-emerald-500/20 to-teal-500/20", tag: "Próximamente", status: "coming_soon", url: null },
-  { title: "IronFit", category: "Fitness", description: "Gimnasio con horarios de clases, membresías online y reservas de sesiones.", gradient: "from-amber-500/20 to-orange-500/20", tag: "Próximamente", status: "coming_soon", url: null },
-  { title: "HomeVista", category: "Inmobiliaria", description: "Propiedades con filtros avanzados, mapas interactivos y tours virtuales.", gradient: "from-violet-500/20 to-purple-500/20", tag: "Próximamente", status: "coming_soon", url: null },
+  { title: "Bella Cucina", category: "Restaurante", description: "Menú interactivo con reservas online, galería de platos y sistema de pedidos.", gradient: "from-orange-500/30 to-red-500/20", tag: "Live", status: "live", url: "https://demo-restaurante.tudominio.com" },
+  { title: "ShopNova", category: "E-Commerce", description: "Tienda online completa con carrito, pagos integrados y gestión de inventario.", gradient: "from-blue-500/30 to-indigo-500/20", tag: "Live", status: "live", url: "https://demo-ecommerce.tudominio.com" },
+  { title: "LegalPro", category: "Servicios", description: "Firma de abogados con agenda online, blog de contenidos y chat en vivo.", gradient: "from-surface-400/20 to-surface-500/15", tag: "Live", status: "live", url: "https://demo-legal.tudominio.com" },
+  { title: "VitalCare", category: "Salud", description: "Clínica médica con citas online, perfiles de doctores y portal de pacientes.", gradient: "from-emerald-500/30 to-teal-500/20", tag: "Próximamente", status: "coming_soon", url: null },
+  { title: "IronFit", category: "Fitness", description: "Gimnasio con horarios de clases, membresías online y reservas de sesiones.", gradient: "from-amber-500/30 to-orange-500/20", tag: "Próximamente", status: "coming_soon", url: null },
+  { title: "HomeVista", category: "Inmobiliaria", description: "Propiedades con filtros avanzados, mapas interactivos y tours virtuales.", gradient: "from-violet-500/30 to-purple-500/20", tag: "Próximamente", status: "coming_soon", url: null },
 ];
 
+// ── Hover Slider Context ──
+interface SliderContextValue { active: number; setActive: (i: number) => void; }
+const SliderCtx = createContext<SliderContextValue>({ active: 0, setActive: () => {} });
+
+// ── Text Stagger on Hover ──
+function StaggerText({ text, index }: { text: string; index: number }) {
+  const { active, setActive } = useContext(SliderCtx);
+  const chars = text.split("");
+  const isActive = active === index;
+
+  return (
+    <span className="relative inline-block" onMouseEnter={() => setActive(index)}>
+      {chars.map((char, ci) => (
+        <span key={`${char}-${ci}`} className="relative inline-block overflow-hidden">
+          <MotionConfig transition={{ delay: ci * 0.02, duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}>
+            <motion.span
+              className="inline-block text-surface-500"
+              animate={isActive ? { y: "-110%", opacity: 0 } : { y: "0%", opacity: 0.4 }}
+            >
+              {char === " " ? "\u00A0" : char}
+            </motion.span>
+            <motion.span
+              className="absolute left-0 top-0 inline-block text-white"
+              animate={isActive ? { y: "0%" } : { y: "110%" }}
+            >
+              {char === " " ? "\u00A0" : char}
+            </motion.span>
+          </MotionConfig>
+        </span>
+      ))}
+    </span>
+  );
+}
+
+// ── Mockup Preview ──
+function MockupPreview({ demo, index }: { demo: Demo; index: number }) {
+  const { active } = useContext(SliderCtx);
+
+  return (
+    <motion.div
+      className="absolute inset-0"
+      transition={{ ease: [0.33, 1, 0.68, 1], duration: 0.7 }}
+      animate={active === index
+        ? { clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)" }
+        : { clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)" }
+      }
+    >
+      <div className={`h-full w-full bg-gradient-to-br ${demo.gradient} p-6`}>
+        <div className="h-full rounded-xl border border-white/5 bg-black/40 backdrop-blur-sm">
+          <div className="flex items-center gap-1.5 border-b border-white/5 px-4 py-2.5">
+            <div className="h-2 w-2 rounded-full bg-surface-500" />
+            <div className="h-2 w-2 rounded-full bg-surface-500" />
+            <div className="h-2 w-2 rounded-full bg-surface-500" />
+            <span className="ml-2 text-[10px] text-surface-500">{demo.title.toLowerCase().replace(/\s/g, "")}.com</span>
+          </div>
+          <div className="space-y-3 p-5">
+            <div className="flex items-center justify-between">
+              <div className="h-3 w-20 rounded bg-white/15" />
+              <div className="flex gap-3">
+                <div className="h-2 w-10 rounded bg-white/10" />
+                <div className="h-2 w-10 rounded bg-white/10" />
+              </div>
+            </div>
+            <div className="rounded-lg bg-white/5 p-5">
+              <div className="mb-2 h-4 w-3/4 rounded bg-white/15" />
+              <div className="mb-1.5 h-2.5 w-full rounded bg-white/8" />
+              <div className="mb-3 h-2.5 w-2/3 rounded bg-white/5" />
+              <div className="h-7 w-24 rounded-lg bg-cyan-500/30" />
+            </div>
+            <div className="grid grid-cols-3 gap-2">
+              {[1, 2, 3].map((k) => (
+                <div key={k} className="rounded-lg border border-white/5 bg-white/[0.02] p-3">
+                  <div className="mb-2 h-10 rounded bg-white/5" />
+                  <div className="h-2 w-3/4 rounded bg-white/10" />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+// ── Waitlist Modal ──
 function WaitlistModal({ demo, onClose }: { demo: Demo; onClose: () => void }) {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
@@ -61,109 +143,128 @@ function WaitlistModal({ demo, onClose }: { demo: Demo; onClose: () => void }) {
   );
 }
 
-function DemoCard({ demo, index, onWaitlist }: { demo: Demo; index: number; onWaitlist: () => void }) {
-  const tilt = useTilt<HTMLDivElement>();
-  const isFirst = index === 0;
-
-  return (
-    <motion.div
-      layout
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, scale: 0.95 }}
-      transition={{ duration: 0.4, delay: index * 0.06 }}
-      className={isFirst ? "sm:col-span-2 sm:row-span-2" : ""}
-    >
-      <div
-        ref={tilt.ref}
-        onMouseMove={tilt.onMouseMove}
-        onMouseLeave={tilt.onMouseLeave}
-        className="group h-full overflow-hidden glass rounded-2xl transition-all duration-300 ease-out hover:-translate-y-1 hover:border-white/20 hover:shadow-xl hover:shadow-cyan-500/5"
-        style={{ transformStyle: "preserve-3d", transition: "transform 0.15s ease-out" }}
-      >
-        <div className={`relative overflow-hidden bg-gradient-to-br ${demo.gradient} ${isFirst ? "h-56 sm:h-72" : "h-44"} p-5`}>
-          <div className={`h-full rounded-lg border border-white/5 bg-black/40 backdrop-blur-sm transition-transform duration-500 ease-out group-hover:scale-[1.03] ${isFirst ? "-translate-y-2" : ""}`}>
-            <div className="flex items-center gap-1.5 border-b border-white/5 px-3 py-2">
-              <div className="h-2 w-2 rounded-full bg-surface-600" />
-              <div className="h-2 w-2 rounded-full bg-surface-600" />
-              <div className="h-2 w-2 rounded-full bg-surface-600" />
-            </div>
-            <div className="space-y-2 p-3">
-              <div className={`rounded bg-white/10 ${isFirst ? "h-4 w-3/4" : "h-2 w-3/4"}`} />
-              <div className={`rounded bg-white/5 ${isFirst ? "h-3 w-full" : "h-2 w-full"}`} />
-              <div className={`rounded bg-white/5 ${isFirst ? "h-3 w-5/6" : "h-2 w-5/6"}`} />
-              {isFirst && <div className="mt-2 h-6 w-20 rounded bg-cyan-500/30" />}
-            </div>
-          </div>
-          {demo.tag && (
-            <span className={`absolute top-3 right-3 rounded-full px-3 py-1 text-xs font-bold ${
-              demo.status === "live" ? "bg-emerald-500/20 text-emerald-400 ring-1 ring-emerald-500/30" : "bg-cyan-500/20 text-cyan-400 ring-1 ring-cyan-500/30"
-            }`}>{demo.tag}</span>
-          )}
-          <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-100">
-            {demo.status === "live" ? (
-              <a href={demo.url!} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-lg bg-cyan-500 px-5 py-2.5 text-sm font-bold text-black shadow-lg">
-                <Eye className="h-4 w-4" /> Ver Demo
-              </a>
-            ) : (
-              <button onClick={onWaitlist} className="inline-flex items-center gap-2 rounded-lg bg-white px-5 py-2.5 text-sm font-bold text-black shadow-lg">
-                <Bell className="h-4 w-4" /> Avisarme
-              </button>
-            )}
-          </div>
-        </div>
-        <div className="p-5">
-          <div className="mb-2 flex items-center justify-between">
-            <h3 className={`font-bold text-white ${isFirst ? "text-xl" : "text-base"}`}>{demo.title}</h3>
-            <span className="text-xs text-surface-500">{demo.category}</span>
-          </div>
-          <p className="mb-3 text-sm leading-relaxed text-surface-400">{demo.description}</p>
-          {demo.status === "live" ? (
-            <a href={demo.url!} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm font-medium text-cyan-400 hover:text-cyan-300">
-                    <ExternalLink className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5" /> Ver en vivo
-            </a>
-          ) : (
-            <button onClick={onWaitlist} className="inline-flex items-center gap-1.5 text-sm font-medium text-surface-500 hover:text-cyan-400">
-                    <Clock className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5" /> En desarrollo
-            </button>
-          )}
-        </div>
-      </div>
-    </motion.div>
-  );
-}
-
+// ── Main Demos Section ──
 export default function Demos() {
-  const [activeCategory, setActiveCategory] = useState("Todos");
+  const [active, setActiveState] = useState(0);
   const [waitlistDemo, setWaitlistDemo] = useState<Demo | null>(null);
-  const filtered = activeCategory === "Todos" ? demos : demos.filter((d) => d.category === activeCategory);
+  const setActive = useCallback((i: number) => setActiveState(i), []);
 
   return (
     <section id="demos" className="py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <SectionTitle eyebrow="Portafolio" lightText="Demos listas para" boldText="tu negocio." className="mb-10" />
+        <SectionTitle eyebrow="Portafolio" lightText="Demos listas para" boldText="tu negocio." className="mb-14" />
 
-        {/* Editorial filters */}
-        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2 }} className="mb-10 flex flex-wrap items-center gap-x-1 gap-y-2 text-sm">
-          {categories.map((cat, i) => (
-            <span key={cat} className="flex items-center">
-              <button onClick={() => setActiveCategory(cat)}
-                className={`px-2 py-1 font-medium transition-colors ${activeCategory === cat ? "text-cyan-400" : "text-surface-500 hover:text-surface-300"}`}>
-                {cat}
-              </button>
-              {i < categories.length - 1 && <span className="text-surface-800">/</span>}
-            </span>
-          ))}
-        </motion.div>
+        <SliderCtx.Provider value={{ active, setActive }}>
+          <div className="grid gap-8 lg:grid-cols-[1fr_1.2fr] lg:gap-12">
+            {/* Left -- Text list */}
+            <div className="flex flex-col justify-center">
+              {demos.map((demo, i) => {
+                const isActive = active === i;
+                return (
+                  <div
+                    key={demo.title}
+                    className={`group border-b border-surface-800/40 py-5 transition-all duration-300 ${isActive ? "" : "opacity-60 hover:opacity-80"}`}
+                    onMouseEnter={() => setActive(i)}
+                  >
+                    <div className="mb-1.5 flex items-center justify-between">
+                      <h3 className="text-2xl font-bold sm:text-3xl">
+                        <StaggerText text={demo.title} index={i} />
+                      </h3>
+                      <div className="flex items-center gap-2">
+                        {demo.tag && (
+                          <span className={`rounded-full px-2.5 py-0.5 text-[10px] font-bold ${
+                            demo.status === "live" ? "bg-emerald-500/15 text-emerald-400" : "bg-cyan-500/15 text-cyan-400"
+                          }`}>{demo.tag}</span>
+                        )}
+                        {isActive && demo.status === "live" && (
+                          <motion.a
+                            href={demo.url!}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            initial={{ opacity: 0, x: -5 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            className="flex h-7 w-7 items-center justify-center rounded-full bg-cyan-500/10 text-cyan-400 transition-colors hover:bg-cyan-500/20"
+                          >
+                            <ArrowUpRight className="h-3.5 w-3.5" />
+                          </motion.a>
+                        )}
+                      </div>
+                    </div>
 
-        {/* Masonry grid */}
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          <AnimatePresence mode="popLayout">
-            {filtered.map((demo, i) => (
-              <DemoCard key={demo.title} demo={demo} index={i} onWaitlist={() => setWaitlistDemo(demo)} />
-            ))}
-          </AnimatePresence>
-        </div>
+                    <AnimatePresence>
+                      {isActive && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.3, ease: "easeInOut" }}
+                          className="overflow-hidden"
+                        >
+                          <p className="mb-2 text-sm leading-relaxed text-surface-400">{demo.description}</p>
+                          <div className="flex items-center gap-3">
+                            <span className="text-xs text-surface-600">{demo.category}</span>
+                            {demo.status === "live" ? (
+                              <a href={demo.url!} target="_blank" rel="noopener noreferrer"
+                                className="inline-flex items-center gap-1 text-xs font-medium text-cyan-400 hover:text-cyan-300">
+                                <ExternalLink className="h-3 w-3" /> Ver en vivo
+                              </a>
+                            ) : (
+                              <button onClick={() => setWaitlistDemo(demo)}
+                                className="inline-flex items-center gap-1 text-xs font-medium text-surface-500 hover:text-cyan-400">
+                                <Clock className="h-3 w-3" /> Lista de espera
+                              </button>
+                            )}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Right -- Mockup preview with clipPath transitions */}
+            <div className="relative hidden aspect-[4/3] overflow-hidden rounded-2xl border border-white/5 lg:block">
+              {demos.map((demo, i) => (
+                <MockupPreview key={demo.title} demo={demo} index={i} />
+              ))}
+
+              {/* Floating label */}
+              <div className="absolute bottom-4 left-4 z-10">
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={demos[active].title}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    className="glass inline-block rounded-lg px-3 py-1.5 text-xs font-medium text-white"
+                  >
+                    {demos[active].title} — {demos[active].category}
+                  </motion.span>
+                </AnimatePresence>
+              </div>
+            </div>
+
+            {/* Mobile fallback -- simple card for active demo */}
+            <div className="lg:hidden">
+              <div className={`overflow-hidden rounded-2xl bg-gradient-to-br ${demos[active].gradient} p-5`}>
+                <div className="rounded-xl border border-white/5 bg-black/40 p-4 backdrop-blur-sm">
+                  <div className="flex items-center gap-1.5 border-b border-white/5 pb-2 mb-3">
+                    <div className="h-2 w-2 rounded-full bg-surface-500" />
+                    <div className="h-2 w-2 rounded-full bg-surface-500" />
+                    <div className="h-2 w-2 rounded-full bg-surface-500" />
+                  </div>
+                  <div className="space-y-2">
+                    <div className="h-3 w-3/4 rounded bg-white/15" />
+                    <div className="h-2 w-full rounded bg-white/8" />
+                    <div className="h-2 w-2/3 rounded bg-white/5" />
+                    <div className="mt-3 h-7 w-24 rounded bg-cyan-500/30" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </SliderCtx.Provider>
       </div>
 
       <AnimatePresence>

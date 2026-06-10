@@ -1,6 +1,6 @@
 import { useState, useCallback, createContext, useContext } from "react";
 import { motion, AnimatePresence, MotionConfig } from "framer-motion";
-import { ExternalLink, Clock, Bell, Eye, X, ArrowUpRight } from "lucide-react";
+import { ExternalLink, Clock, Bell, X, ArrowUpRight } from "lucide-react";
 import SectionTitle from "./SectionTitle";
 
 type DemoStatus = "live" | "coming_soon";
